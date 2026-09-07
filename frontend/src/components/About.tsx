@@ -10,6 +10,7 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -46,6 +47,24 @@ export default function About() {
           delay: 0.15,
         }
       );
+
+      if (statsRef.current) {
+        gsap.fromTo(
+          statsRef.current.children,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: statsRef.current,
+              start: 'top 85%',
+            },
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -57,52 +76,73 @@ export default function About() {
       ref={sectionRef}
       className="py-24 sm:py-32 px-6 lg:px-10 bg-[#0c0c0c] border-t border-[#1a1a1a]"
     >
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-        <div ref={leftRef} className="lg:col-span-7">
-          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
-            // Our Manifesto
-          </p>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] leading-[0.92] mb-8">
-            Sustainable <br />
-            Streetwear <br />
-            Culture.
-          </h2>
-          <div className="space-y-5 text-[#888] leading-relaxed max-w-xl">
-            <p>
-              ThriftLab was born out of a passion for preserving fashion history.
-              Every piece tells a story, carrying the weight of decades past
-              without compromising modern style and individuality.
+      <div className="max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-20">
+          <div ref={leftRef} className="lg:col-span-7">
+            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
+              // Our Manifesto
             </p>
-            <p>
-              By choosing second-hand, you actively reduce textile waste while
-              securing one-of-a-kind garments that mass-market fast fashion
-              simply cannot replicate.
-            </p>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] leading-[0.92] mb-8">
+              Sustainable <br />
+              Streetwear <br />
+              Culture.
+            </h2>
+            <div className="space-y-5 text-[#888] leading-relaxed max-w-xl">
+              <p>
+                ThriftLab was born out of a passion for preserving fashion history.
+                Every piece tells a story, carrying the weight of decades past
+                without compromising modern style and individuality.
+              </p>
+              <p>
+                By choosing second-hand, you actively reduce textile waste while
+                securing one-of-a-kind garments that mass-market fast fashion
+                simply cannot replicate.
+              </p>
+            </div>
+          </div>
+
+          <div ref={rightRef} className="lg:col-span-5 grid grid-cols-2 gap-4">
+            <div className="border border-[#1a1a1a] p-6 flex flex-col justify-between h-52 sm:h-60 bg-[#111]">
+              <span className="text-4xl font-bold font-mono text-[#ff3b00]">100%</span>
+              <div>
+                <h4 className="text-sm font-semibold uppercase tracking-tight mb-1">
+                  Authentic Vintage
+                </h4>
+                <p className="text-[11px] text-[#666]">
+                  Sourced from verified global archives.
+                </p>
+              </div>
+            </div>
+            <div className="border border-[#1a1a1a] p-6 flex flex-col justify-between h-52 sm:h-60 bg-[#111] mt-8">
+              <span className="text-4xl font-bold font-mono text-[#f5f5f0]">0%</span>
+              <div>
+                <h4 className="text-sm font-semibold uppercase tracking-tight mb-1">
+                  Fast Fashion
+                </h4>
+                <p className="text-[11px] text-[#666]">
+                  Against mass-produced textile waste.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div ref={rightRef} className="lg:col-span-5 grid grid-cols-2 gap-4">
-          <div className="border border-[#1a1a1a] p-6 flex flex-col justify-between h-56 sm:h-64 bg-[#111]">
-            <span className="text-4xl font-bold font-mono text-[#ff3b00]">100%</span>
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-tight mb-1">
-                Authentic Vintage
-              </h4>
-              <p className="text-[11px] text-[#666]">
-                Sourced from verified global archives.
-              </p>
-            </div>
+        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#1a1a1a] border border-[#1a1a1a]">
+          <div className="bg-[#0c0c0c] p-6 sm:p-8 text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-[#ff3b00] font-mono">40+</span>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-[#666] mt-2">Curated Pieces</p>
           </div>
-          <div className="border border-[#1a1a1a] p-6 flex flex-col justify-between h-56 sm:h-64 bg-[#111] mt-8">
-            <span className="text-4xl font-bold font-mono text-[#f5f5f0]">0%</span>
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-tight mb-1">
-                Fast Fashion
-              </h4>
-              <p className="text-[11px] text-[#666]">
-                Against mass-produced textile waste.
-              </p>
-            </div>
+          <div className="bg-[#0c0c0c] p-6 sm:p-8 text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-[#f5f5f0] font-mono">12</span>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-[#666] mt-2">Categories</p>
+          </div>
+          <div className="bg-[#0c0c0c] p-6 sm:p-8 text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-[#f5f5f0] font-mono">9/10</span>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-[#666] mt-2">Avg Condition</p>
+          </div>
+          <div className="bg-[#0c0c0c] p-6 sm:p-8 text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-[#ff3b00] font-mono">1-of-1</span>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-[#666] mt-2">Every Piece</p>
           </div>
         </div>
       </div>
