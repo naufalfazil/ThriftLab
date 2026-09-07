@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
@@ -48,7 +48,6 @@ function ProductSkeleton() {
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [filtered, setFiltered] = useState<Product[]>([]);
   const [selected, setSelected] = useState('All');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -56,6 +55,11 @@ export default function FeaturedProducts() {
   const headingRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+
+  const filtered = useMemo(() => {
+    if (selected === 'All') return products;
+    return products.filter((p) => p.category.toLowerCase() === selected.toLowerCase());
+  }, [selected, products]);
 
   useEffect(() => {
     fetch(`${API_URL}/api/products`)
@@ -65,7 +69,6 @@ export default function FeaturedProducts() {
       })
       .then((data: Product[]) => {
         setProducts(data);
-        setFiltered(data);
         setLoading(false);
       })
       .catch(() => {
@@ -73,18 +76,6 @@ export default function FeaturedProducts() {
         setLoading(false);
       });
   }, []);
-
-  useEffect(() => {
-    if (selected === 'All') {
-      setFiltered(products);
-    } else {
-      setFiltered(
-        products.filter(
-          (p) => p.category.toLowerCase() === selected.toLowerCase()
-        )
-      );
-    }
-  }, [selected, products]);
 
   useEffect(() => {
     if (loading || error) return;
@@ -157,7 +148,7 @@ export default function FeaturedProducts() {
       <div className="max-w-[1400px] mx-auto">
         <div ref={headingRef} className="mb-12">
           <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
-            // Curated Stock & Archives
+            {"// Curated Stock & Archives"}
           </p>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em]">

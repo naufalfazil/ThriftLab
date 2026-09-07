@@ -7,7 +7,6 @@ export default function PageLoader({ onComplete }: { onComplete: () => void }) {
   const loaderRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLSpanElement>(null);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
