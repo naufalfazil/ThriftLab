@@ -4,6 +4,8 @@ import { useState } from 'react';
 import PageLoader from '@/components/PageLoader';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import Marquee from '@/components/Marquee';
+import Showcase from '@/components/Showcase';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import Categories from '@/components/Categories';
 import About from '@/components/About';
@@ -17,7 +19,9 @@ export default function Home() {
     <main className="bg-[#0a0a0a] min-h-screen text-[#f5f5f0] selection:bg-[#ff3b00] selection:text-[#f5f5f0]">
       {loading && <PageLoader onComplete={() => setLoading(false)} />}
       <Navbar />
-      <Hero />
+      <Hero ready={!loading} />
+      <Marquee />
+      <Showcase />
       <FeaturedProducts />
       <Categories />
       <About />

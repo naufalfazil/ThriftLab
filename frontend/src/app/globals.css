@@ -12,6 +12,10 @@
   --font-mono: var(--font-mono), "JetBrains Mono", monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-thrift-dark);
   color: var(--color-thrift-light);
