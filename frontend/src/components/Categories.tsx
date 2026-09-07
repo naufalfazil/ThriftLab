@@ -99,47 +99,59 @@ export default function Categories() {
       className="py-24 sm:py-32 px-6 lg:px-10 border-t border-thrift-border"
     >
       <div className="max-w-[1400px] mx-auto">
-        <div ref={headingRef} className="mb-16">
-          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-accent mb-4">
-            {"// Browse By Style"}
-          </p>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] text-thrift-cream">
-            Categories
-          </h2>
-        </div>
+        {/* Section number */}
+        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted/60 mb-6 block">
+          03 / Categories
+        </span>
 
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {categories.map((cat, idx) => (
-            <a
-              key={cat.name}
-              href="#shop"
-              className={`group relative overflow-hidden bg-thrift-surface border border-thrift-border hover:border-thrift-border-light transition-all duration-500 ${
-                idx === 0 ? 'sm:col-span-2 lg:col-span-2 aspect-[16/7]' : 'aspect-[4/3]'
-              }`}
-            >
-              <img
-                src={cat.image}
-                alt={cat.name}
-                className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-thrift-darker via-thrift-darker/20 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
-                <div className="flex items-end justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono text-thrift-accent uppercase tracking-[0.2em]">
-                      {cat.count} {cat.count === 1 ? 'item' : 'items'}
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-thrift-cream mt-1">
-                      {cat.name}
-                    </h3>
-                  </div>
-                  <div className="w-10 h-10 border border-thrift-border-light flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4 text-thrift-cream" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Left — big heading */}
+          <div ref={headingRef} className="lg:col-span-4 flex flex-col justify-start lg:sticky lg:top-28 self-start">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-[-0.04em] leading-[0.88] text-thrift-cream mb-6">
+              Browse <br />
+              By <br />
+              Style
+            </h2>
+            <div className="w-12 h-px bg-thrift-accent mb-6" />
+            <p className="text-sm text-thrift-text-muted leading-relaxed max-w-xs">
+              Curated collections sorted by garment type. Find exactly what fits your wardrobe.
+            </p>
+          </div>
+
+          {/* Right — category grid */}
+          <div ref={gridRef} className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            {categories.map((cat, idx) => (
+              <a
+                key={cat.name}
+                href="#shop"
+                className={`group relative overflow-hidden bg-thrift-surface border border-thrift-border hover:border-thrift-border-light transition-all duration-500 ${
+                  idx === 0 ? 'sm:col-span-2 aspect-[16/7]' : 'aspect-[4/3]'
+                }`}
+              >
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-thrift-darker via-thrift-darker/20 to-transparent" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <span className="text-[10px] font-mono text-thrift-accent uppercase tracking-[0.2em]">
+                        {cat.count} {cat.count === 1 ? 'item' : 'items'}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-thrift-cream mt-1">
+                        {cat.name}
+                      </h3>
+                    </div>
+                    <div className="w-10 h-10 border border-thrift-border-light flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
+                      <ArrowUpRight className="w-4 h-4 text-thrift-cream" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
