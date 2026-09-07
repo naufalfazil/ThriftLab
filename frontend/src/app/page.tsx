@@ -5,6 +5,7 @@ import PageLoader from '@/components/PageLoader';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Marquee from '@/components/Marquee';
+import Showcase from '@/components/Showcase';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import Categories from '@/components/Categories';
 import About from '@/components/About';
@@ -20,6 +21,7 @@ export default function Home() {
       <Navbar />
       <Hero ready={!loading} />
       <Marquee />
+      <Showcase />
       <FeaturedProducts />
       <Categories />
       <About />
