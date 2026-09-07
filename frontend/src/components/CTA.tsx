@@ -60,7 +60,7 @@ export default function CTA() {
       <div className="max-w-[1400px] mx-auto text-center">
         <div ref={textRef}>
           <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-6">
-            // Don&apos;t Miss Out
+            {"// Don't Miss Out"}
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold uppercase tracking-[-0.04em] leading-[0.9] mb-6">
             Find Your <br />

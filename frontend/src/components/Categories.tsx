@@ -101,7 +101,7 @@ export default function Categories() {
       <div className="max-w-[1400px] mx-auto">
         <div ref={headingRef} className="mb-16">
           <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
-            // Browse By Style
+            {"// Browse By Style"}
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em]">
             Categories

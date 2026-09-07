@@ -82,7 +82,7 @@ export default function Showcase() {
     <section ref={sectionRef} className="py-20 sm:py-28 overflow-hidden">
       <div ref={headingRef} className="px-6 lg:px-10 max-w-[1400px] mx-auto mb-12 opacity-0">
         <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
-          // Editor&apos;s Pick
+          {"// Editor's Pick"}
         </p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-[-0.03em]">
           Featured Pieces

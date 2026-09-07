@@ -79,9 +79,9 @@ export default function About() {
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-20">
           <div ref={leftRef} className="lg:col-span-7">
-            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
-              // Our Manifesto
-            </p>
+          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
+            {"// Our Manifesto"}
+          </p>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] leading-[0.92] mb-8">
               Sustainable <br />
               Streetwear <br />
