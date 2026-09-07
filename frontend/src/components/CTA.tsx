@@ -58,15 +58,17 @@ export default function CTA() {
       className="py-24 sm:py-32 px-6 lg:px-10 bg-thrift-cream border-t border-thrift-dark/10"
     >
       <div className="max-w-[1400px] mx-auto">
+        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted mb-6 block">
+          04 / CTA
+        </span>
+
         <div ref={textRef} className="max-w-2xl">
-          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-accent mb-6">
-            {"// Don't Miss Out"}
-          </p>
-          <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold uppercase tracking-[-0.04em] leading-[0.9] mb-6 text-thrift-dark">
+          <h2 className="text-5xl sm:text-6xl lg:text-8xl font-bold uppercase tracking-[-0.04em] leading-[0.86] mb-8 text-thrift-dark">
             Find Your <br />
             Next Piece.
           </h2>
-          <p className="text-sm text-thrift-text-muted max-w-md mb-10">
+          <div className="w-16 h-px bg-thrift-accent mb-8" />
+          <p className="text-sm text-thrift-text-muted max-w-md mb-10 leading-relaxed">
             New drops every week. Each piece is one-of-a-kind — once it&apos;s gone, it&apos;s gone.
           </p>
         </div>
