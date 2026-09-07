@@ -210,46 +210,60 @@ export default function FeaturedProducts() {
             </button>
           </div>
         ) : (
-          <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {filtered.map((product) => (
-              <article
-                key={product.id}
-                className="group bg-thrift-darker border border-thrift-border hover:border-thrift-border-light transition-all duration-500 cursor-pointer"
-              >
-                <div className="relative aspect-[3/4] overflow-hidden bg-thrift-surface">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-thrift-darker/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute top-3 left-3 px-2 py-1 bg-thrift-darker/80 text-[9px] font-mono uppercase tracking-wider text-thrift-text-muted">
-                    {product.category}
-                  </div>
-                  <div className="absolute bottom-3 right-3 w-8 h-8 bg-thrift-accent flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4 text-thrift-cream" />
-                  </div>
-                </div>
+          <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-4 sm:gap-5">
+            {filtered.slice(0, 12).map((product, idx) => {
+              const isFirst = idx === 0;
+              const isThird = idx === 2;
+              let gridClass = '';
+              if (isFirst) gridClass = 'col-span-2 lg:col-span-5 lg:row-span-2';
+              else if (isThird) gridClass = 'col-span-2 lg:col-span-7';
+              else gridClass = 'col-span-1';
 
-                <div className="p-4 sm:p-5">
-                  <div className="flex items-center justify-between text-[10px] font-mono text-thrift-text-muted mb-2">
-                    <span>{product.details.size}</span>
-                    <span className="text-thrift-accent">
-                      {product.details.condition}
-                    </span>
+              return (
+                <article
+                  key={product.id}
+                  className={`group bg-thrift-darker border border-thrift-border hover:border-thrift-border-light transition-all duration-500 cursor-pointer ${gridClass}`}
+                >
+                  <div className={`relative overflow-hidden bg-thrift-surface ${isFirst ? 'aspect-[3/4] lg:aspect-auto lg:h-full' : isThird ? 'aspect-[16/9]' : 'aspect-[3/4]'}`}>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-thrift-darker/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute top-3 left-3 px-2 py-1 bg-thrift-darker/80 text-[9px] font-mono uppercase tracking-wider text-thrift-text-muted">
+                      {product.category}
+                    </div>
+                    <div className="absolute bottom-3 right-3 w-8 h-8 bg-thrift-accent flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                      <ArrowUpRight className="w-4 h-4 text-thrift-cream" />
+                    </div>
+                    {isFirst && (
+                      <div className="absolute top-4 right-4 text-[10px] font-mono text-thrift-accent uppercase tracking-widest">
+                        Featured
+                      </div>
+                    )}
                   </div>
-                  <h3 className="text-sm font-semibold uppercase tracking-tight text-thrift-text group-hover:text-thrift-accent transition-colors duration-300 line-clamp-1">
-                    {product.name}
-                  </h3>
-                  <div className="mt-3 flex items-center justify-between">
-                    <span className="text-sm font-bold font-mono text-thrift-cream">
-                      Rp {product.price.toLocaleString('id-ID')}
-                    </span>
+
+                  <div className="p-4 sm:p-5">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-thrift-text-muted mb-2">
+                      <span>{product.details.size}</span>
+                      <span className="text-thrift-accent">
+                        {product.details.condition}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-semibold uppercase tracking-tight text-thrift-text group-hover:text-thrift-accent transition-colors duration-300 line-clamp-1">
+                      {product.name}
+                    </h3>
+                    <div className="mt-3 flex items-center justify-between">
+                      <span className="text-sm font-bold font-mono text-thrift-cream">
+                        Rp {product.price.toLocaleString('id-ID')}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         )}
       </div>
