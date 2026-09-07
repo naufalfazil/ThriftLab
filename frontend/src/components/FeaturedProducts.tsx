@@ -160,15 +160,15 @@ export default function FeaturedProducts() {
           </div>
         </div>
 
-        <div ref={tabsRef} className="flex flex-nowrap overflow-x-auto no-scrollbar gap-2 mb-14 -mx-6 px-6 lg:mx-0 lg:px-0">
+        <div ref={tabsRef} className="flex flex-nowrap overflow-x-auto no-scrollbar gap-1.5 mb-8 -mx-6 px-6 lg:mx-0 lg:px-0">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelected(cat)}
-              className={`px-4 py-2 text-[10px] font-mono uppercase tracking-[0.15em] border transition-all duration-300 shrink-0 ${
+              className={`px-3 py-1.5 text-[9px] font-mono uppercase tracking-[0.12em] transition-all duration-300 shrink-0 ${
                 selected === cat
-                  ? 'bg-[#ff3b00] text-[#f5f5f0] border-[#ff3b00]'
-                  : 'bg-transparent text-[#777] border-[#222] hover:border-[#555] hover:text-[#ccc]'
+                  ? 'bg-[#ff3b00] text-[#f5f5f0]'
+                  : 'text-[#666] hover:text-[#ccc]'
               }`}
             >
               {cat}
