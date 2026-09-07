@@ -49,14 +49,14 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#222]'
+            ? 'bg-thrift-darker/95 backdrop-blur-md border-b border-thrift-border'
             : 'bg-transparent'
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
           <a href="#home" className="relative z-10">
-            <span className="text-lg lg:text-xl font-bold tracking-[-0.03em] uppercase">
-              Thrift<span className="text-[#ff3b00]">Lab</span>
+            <span className="text-lg lg:text-xl font-bold tracking-[-0.03em] uppercase text-thrift-cream">
+              Thrift<span className="text-thrift-accent">Lab</span>
             </span>
           </a>
 
@@ -65,10 +65,10 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[11px] font-medium uppercase tracking-[0.15em] text-[#999] hover:text-[#f5f5f0] transition-colors duration-300 relative group"
+                className="text-[11px] font-medium uppercase tracking-[0.15em] text-thrift-text-muted hover:text-thrift-cream transition-colors duration-300 relative group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#ff3b00] group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-thrift-accent group-hover:w-full transition-all duration-300" />
               </a>
             ))}
           </nav>
@@ -76,7 +76,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <a
               href="#shop"
-              className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 border border-[#333] text-[#f5f5f0] hover:bg-[#ff3b00] hover:border-[#ff3b00] transition-all duration-300"
+              className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 border border-thrift-border-light text-thrift-cream hover:bg-thrift-accent hover:border-thrift-accent transition-all duration-300"
             >
               Shop Now
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -85,7 +85,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden relative z-10 p-2 text-[#f5f5f0]"
+            className="lg:hidden relative z-10 p-2 text-thrift-cream"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -95,7 +95,7 @@ export default function Navbar() {
 
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-30 bg-[#0a0a0a] flex flex-col justify-center px-8 ${
+        className={`fixed inset-0 z-30 bg-thrift-darker flex flex-col justify-center px-8 ${
           mobileOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
         style={{ opacity: mobileOpen ? 1 : 0 }}
@@ -107,7 +107,7 @@ export default function Navbar() {
               ref={(el) => { mobileLinksRef.current[i] = el; }}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-4xl font-bold uppercase tracking-tight text-[#f5f5f0] hover:text-[#ff3b00] transition-colors"
+              className="text-4xl font-bold uppercase tracking-tight text-thrift-cream hover:text-thrift-accent transition-colors"
             >
               {link.label}
             </a>
@@ -115,7 +115,7 @@ export default function Navbar() {
           <a
             href="#shop"
             onClick={() => setMobileOpen(false)}
-            className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-[#ff3b00] mt-4"
+            className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-thrift-accent mt-4"
           >
             Shop Now <ArrowUpRight className="w-4 h-4" />
           </a>

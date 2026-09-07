@@ -74,20 +74,22 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-24 sm:py-32 px-6 lg:px-10 bg-[#0c0c0c] border-t border-[#1a1a1a]"
+      className="py-24 sm:py-32 px-6 lg:px-10 bg-thrift-cream"
     >
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-20">
+        {/* Section number */}
+        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted/60 mb-6 block">
+          02 / About
+        </span>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-20">
           <div ref={leftRef} className="lg:col-span-7">
-          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
-            {"// Our Manifesto"}
-          </p>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] leading-[0.92] mb-8">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] leading-[0.92] mb-8 text-thrift-dark">
               Sustainable <br />
               Streetwear <br />
               Culture.
             </h2>
-            <div className="space-y-5 text-[#888] leading-relaxed max-w-xl">
+            <div className="space-y-5 text-thrift-text-muted leading-relaxed max-w-xl">
               <p>
                 ThriftLab was born out of a passion for preserving fashion history.
                 Every piece tells a story, carrying the weight of decades past
@@ -102,24 +104,24 @@ export default function About() {
           </div>
 
           <div ref={rightRef} className="lg:col-span-5 grid grid-cols-2 gap-4">
-            <div className="border border-[#1a1a1a] p-6 flex flex-col justify-between h-52 sm:h-60 bg-[#111]">
-              <span className="text-4xl font-bold font-mono text-[#ff3b00]">100%</span>
+            <div className="border border-thrift-dark/10 p-6 flex flex-col justify-between h-52 sm:h-60 bg-thrift-dark">
+              <span className="text-4xl font-bold font-mono text-thrift-accent">100%</span>
               <div>
-                <h4 className="text-sm font-semibold uppercase tracking-tight mb-1">
+                <h4 className="text-sm font-semibold uppercase tracking-tight mb-1 text-thrift-cream">
                   Authentic Vintage
                 </h4>
-                <p className="text-[11px] text-[#666]">
+                <p className="text-[11px] text-thrift-text-muted">
                   Sourced from verified global archives.
                 </p>
               </div>
             </div>
-            <div className="border border-[#1a1a1a] p-6 flex flex-col justify-between h-52 sm:h-60 bg-[#111] mt-8">
-              <span className="text-4xl font-bold font-mono text-[#f5f5f0]">0%</span>
+            <div className="border border-thrift-dark/10 p-6 flex flex-col justify-between h-52 sm:h-60 bg-thrift-dark mt-8">
+              <span className="text-4xl font-bold font-mono text-thrift-cream">0%</span>
               <div>
-                <h4 className="text-sm font-semibold uppercase tracking-tight mb-1">
+                <h4 className="text-sm font-semibold uppercase tracking-tight mb-1 text-thrift-cream">
                   Fast Fashion
                 </h4>
-                <p className="text-[11px] text-[#666]">
+                <p className="text-[11px] text-thrift-text-muted">
                   Against mass-produced textile waste.
                 </p>
               </div>
@@ -127,22 +129,22 @@ export default function About() {
           </div>
         </div>
 
-        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#1a1a1a] border border-[#1a1a1a]">
-          <div className="bg-[#0c0c0c] p-6 sm:p-8 text-center">
-            <span className="text-2xl sm:text-3xl font-bold text-[#ff3b00] font-mono">40+</span>
-            <p className="text-[10px] uppercase tracking-[0.15em] text-[#666] mt-2">Curated Pieces</p>
+        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-px bg-thrift-dark/10 border border-thrift-dark/10">
+          <div className="bg-thrift-dark p-6 sm:p-8 text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-thrift-accent font-mono">40+</span>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Curated Pieces</p>
           </div>
-          <div className="bg-[#0c0c0c] p-6 sm:p-8 text-center">
-            <span className="text-2xl sm:text-3xl font-bold text-[#f5f5f0] font-mono">12</span>
-            <p className="text-[10px] uppercase tracking-[0.15em] text-[#666] mt-2">Categories</p>
+          <div className="bg-thrift-dark p-6 sm:p-8 text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-thrift-cream font-mono">12</span>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Categories</p>
           </div>
-          <div className="bg-[#0c0c0c] p-6 sm:p-8 text-center">
-            <span className="text-2xl sm:text-3xl font-bold text-[#f5f5f0] font-mono">9/10</span>
-            <p className="text-[10px] uppercase tracking-[0.15em] text-[#666] mt-2">Avg Condition</p>
+          <div className="bg-thrift-dark p-6 sm:p-8 text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-thrift-cream font-mono">9/10</span>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Avg Condition</p>
           </div>
-          <div className="bg-[#0c0c0c] p-6 sm:p-8 text-center">
-            <span className="text-2xl sm:text-3xl font-bold text-[#ff3b00] font-mono">1-of-1</span>
-            <p className="text-[10px] uppercase tracking-[0.15em] text-[#666] mt-2">Every Piece</p>
+          <div className="bg-thrift-dark p-6 sm:p-8 text-center">
+            <span className="text-2xl sm:text-3xl font-bold text-thrift-accent font-mono">1-of-1</span>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Every Piece</p>
           </div>
         </div>
       </div>

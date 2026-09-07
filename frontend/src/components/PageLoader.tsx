@@ -52,27 +52,27 @@ export default function PageLoader({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0a0a]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-thrift-darker"
       style={{ clipPath: 'inset(0 0 0% 0)' }}
     >
       <div ref={textRef} className="overflow-hidden">
-        <h1 className="text-5xl sm:text-7xl font-bold tracking-[-0.04em] uppercase text-[#f5f5f0]">
-          Thrift<span className="text-[#ff3b00]">Lab</span>
+        <h1 className="text-5xl sm:text-7xl font-bold tracking-[-0.04em] uppercase text-thrift-cream">
+          Thrift<span className="text-thrift-accent">Lab</span>
         </h1>
       </div>
 
       <div className="mt-8 flex items-center gap-4">
-        <div className="w-40 h-[1px] bg-[#222] relative overflow-hidden">
+        <div className="w-40 h-[1px] bg-thrift-border relative overflow-hidden">
           <div
             ref={progressRef}
-            className="absolute inset-0 bg-[#ff3b00] origin-left"
+            className="absolute inset-0 bg-thrift-accent origin-left"
             style={{ transform: 'scaleX(0)' }}
           />
         </div>
-        <span className="text-xs font-mono text-[#666] tabular-nums w-8">{progress}</span>
+        <span className="text-xs font-mono text-thrift-text-muted tabular-nums w-8">{progress}</span>
       </div>
 
-      <p className="mt-6 text-[10px] font-mono uppercase tracking-[0.3em] text-[#555]">
+      <p className="mt-6 text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted">
         Curated Archives
       </p>
     </div>
