@@ -169,12 +169,12 @@ export default function FeaturedProducts() {
           </div>
         </div>
 
-        <div ref={tabsRef} className="flex flex-wrap gap-2 mb-14">
+        <div ref={tabsRef} className="flex flex-nowrap overflow-x-auto no-scrollbar gap-2 mb-14 -mx-6 px-6 lg:mx-0 lg:px-0">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelected(cat)}
-              className={`px-4 py-2 text-[10px] font-mono uppercase tracking-[0.15em] border transition-all duration-300 ${
+              className={`px-4 py-2 text-[10px] font-mono uppercase tracking-[0.15em] border transition-all duration-300 shrink-0 ${
                 selected === cat
                   ? 'bg-[#ff3b00] text-[#f5f5f0] border-[#ff3b00]'
                   : 'bg-transparent text-[#777] border-[#222] hover:border-[#555] hover:text-[#ccc]'
@@ -192,9 +192,12 @@ export default function FeaturedProducts() {
             ))}
           </div>
         ) : error ? (
-          <div className="text-center py-24 border border-[#1a1a1a]">
-            <p className="text-sm text-[#666] font-mono mb-4">
+          <div className="text-center py-24 border border-[#1a1a1a] bg-[#0e0e0e]">
+            <p className="text-sm text-[#666] font-mono mb-2">
               Unable to load products.
+            </p>
+            <p className="text-xs text-[#555] mb-6">
+              Make sure the backend server is running on port 3001.
             </p>
             <button
               onClick={() => window.location.reload()}
@@ -204,10 +207,16 @@ export default function FeaturedProducts() {
             </button>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-24 border border-[#1a1a1a]">
-            <p className="text-sm text-[#666] font-mono">
+          <div className="text-center py-24 border border-[#1a1a1a] bg-[#0e0e0e]">
+            <p className="text-sm text-[#666] font-mono mb-2">
               No products found in this category.
             </p>
+            <button
+              onClick={() => setSelected('All')}
+              className="text-xs uppercase tracking-widest text-[#ff3b00] hover:underline mt-2"
+            >
+              View All
+            </button>
           </div>
         ) : (
           <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
