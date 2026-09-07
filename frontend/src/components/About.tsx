@@ -78,17 +78,18 @@ export default function About() {
     >
       <div className="max-w-[1400px] mx-auto">
         {/* Section number */}
-        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted/60 mb-6 block">
+        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted mb-6 block">
           02 / About
         </span>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-20">
           <div ref={leftRef} className="lg:col-span-7">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] leading-[0.92] mb-8 text-thrift-dark">
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold uppercase tracking-[-0.04em] leading-[0.88] mb-8 text-thrift-dark">
               Sustainable <br />
               Streetwear <br />
               Culture.
             </h2>
+            <div className="w-16 h-px bg-thrift-accent mb-8" />
             <div className="space-y-5 text-thrift-text-muted leading-relaxed max-w-xl">
               <p>
                 ThriftLab was born out of a passion for preserving fashion history.
@@ -115,7 +116,7 @@ export default function About() {
                 </p>
               </div>
             </div>
-            <div className="border border-thrift-dark/10 p-6 flex flex-col justify-between h-52 sm:h-60 bg-thrift-dark mt-8">
+            <div className="border border-thrift-dark/10 p-6 flex flex-col justify-between h-52 sm:h-60 bg-thrift-dark sm:mt-8">
               <span className="text-4xl font-bold font-mono text-thrift-cream">0%</span>
               <div>
                 <h4 className="text-sm font-semibold uppercase tracking-tight mb-1 text-thrift-cream">
