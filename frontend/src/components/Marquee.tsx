@@ -34,14 +34,14 @@ export default function Marquee() {
   const repeated = [...items, ...items, ...items, ...items];
 
   return (
-    <div className="py-6 border-y border-[#1a1a1a] overflow-hidden select-none">
+    <div className="py-6 border-y border-thrift-border overflow-hidden select-none">
       <div ref={trackRef} className="flex items-center gap-0 whitespace-nowrap w-max">
         {repeated.map((item, i) => (
           <span key={i} className="flex items-center gap-6">
-            <span className="text-[clamp(1rem,2.5vw,1.5rem)] font-bold uppercase tracking-[-0.02em] text-[#222]">
+            <span className="text-[clamp(1rem,2.5vw,1.5rem)] font-bold uppercase tracking-[-0.02em] text-thrift-border-light">
               {item}
             </span>
-            <span className="w-2 h-2 bg-[#ff3b00] opacity-40 shrink-0" />
+            <span className="w-2 h-2 bg-thrift-accent opacity-40 shrink-0" />
           </span>
         ))}
       </div>

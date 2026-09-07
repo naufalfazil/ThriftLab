@@ -80,13 +80,18 @@ export default function Showcase() {
 
   return (
     <section ref={sectionRef} className="py-20 sm:py-28 overflow-hidden">
-      <div ref={headingRef} className="px-6 lg:px-10 max-w-[1400px] mx-auto mb-12 opacity-0">
-        <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#ff3b00] mb-4">
-          {"// Editor's Pick"}
-        </p>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-[-0.03em]">
-          Featured Pieces
-        </h2>
+      <div ref={headingRef} className="px-6 lg:px-10 max-w-[1400px] mx-auto mb-12 opacity-0 flex items-end justify-between">
+        <div>
+          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-accent mb-4">
+            {"// Editor's Pick"}
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-[-0.03em] text-thrift-cream">
+            Featured Pieces
+          </h2>
+        </div>
+        <span className="text-[10px] font-mono text-thrift-text-muted hidden sm:block">
+          Scroll &rarr;
+        </span>
       </div>
 
       <div ref={trackRef} className="flex gap-4 sm:gap-6 px-6 lg:px-10 w-max">
@@ -95,29 +100,29 @@ export default function Showcase() {
             key={item.id}
             className="group relative w-[260px] sm:w-[380px] lg:w-[450px] shrink-0 cursor-pointer"
           >
-            <div className="relative aspect-[3/4] overflow-hidden bg-[#111]">
+            <div className="relative aspect-[3/4] overflow-hidden bg-thrift-surface">
               <img
                 src={item.image}
                 alt={item.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/80 via-[#0a0a0a]/20 to-transparent" />
-              <div className="absolute top-4 left-4 px-3 py-1.5 bg-[#ff3b00] text-[9px] font-mono uppercase tracking-wider text-[#f5f5f0]">
+              <div className="absolute inset-0 bg-gradient-to-t from-thrift-darker/80 via-thrift-darker/20 to-transparent" />
+              <div className="absolute top-4 left-4 px-3 py-1.5 bg-thrift-accent text-[9px] font-mono uppercase tracking-wider text-thrift-cream">
                 Featured
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#ff3b00]">
+                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent">
                   {item.category}
                 </span>
-                <h3 className="text-lg sm:text-2xl font-bold uppercase tracking-tight text-[#f5f5f0] mt-1 line-clamp-1">
+                <h3 className="text-lg sm:text-2xl font-bold uppercase tracking-tight text-thrift-cream mt-1 line-clamp-1">
                   {item.name}
                 </h3>
                 <div className="flex items-center justify-between mt-3">
-                  <span className="text-sm font-bold font-mono text-[#f5f5f0]">
+                  <span className="text-sm font-bold font-mono text-thrift-cream">
                     Rp {item.price.toLocaleString('id-ID')}
                   </span>
-                  <div className="w-8 h-8 border border-[#555] flex items-center justify-center group-hover:bg-[#ff3b00] group-hover:border-[#ff3b00] transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4 text-[#f5f5f0]" />
+                  <div className="w-8 h-8 border border-thrift-border-light flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
+                    <ArrowUpRight className="w-4 h-4 text-thrift-cream" />
                   </div>
                 </div>
               </div>
