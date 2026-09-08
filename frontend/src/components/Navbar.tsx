@@ -49,7 +49,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ${
           scrolled
-            ? 'bg-thrift-darker/95 backdrop-blur-md border-b border-thrift-border'
+            ? 'bg-[#faf8f5]/95 backdrop-blur-md border-b border-thrift-border'
             : 'bg-transparent'
         }`}
       >
@@ -76,7 +76,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <a
               href="#shop"
-              className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 border border-thrift-border-light text-thrift-cream hover:bg-thrift-accent hover:border-thrift-accent transition-all duration-300"
+              className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 border border-thrift-border-light text-thrift-cream hover:bg-thrift-accent hover:text-white hover:border-thrift-accent transition-all duration-300"
             >
               Shop Now
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -95,7 +95,7 @@ export default function Navbar() {
 
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-30 bg-thrift-darker flex flex-col justify-center px-8 ${
+        className={`fixed inset-0 z-30 bg-[#faf8f5] flex flex-col justify-center px-8 ${
           mobileOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
         style={{ opacity: mobileOpen ? 1 : 0 }}

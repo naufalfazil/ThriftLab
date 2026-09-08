@@ -58,16 +58,14 @@ export default function Hero({ ready = true }: HeroProps) {
         className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-thrift-accent/5 rounded-full blur-[120px] pointer-events-none"
       />
 
-      {/* Giant section number */}
-      <span className="absolute top-20 right-6 lg:right-10 text-[140px] lg:text-[240px] font-bold text-thrift-border/20 leading-none select-none pointer-events-none tracking-[-0.05em]">
+      <span className="absolute top-20 right-6 lg:right-10 text-[140px] lg:text-[240px] font-bold text-thrift-border/40 leading-none select-none pointer-events-none tracking-[-0.05em]">
         01
       </span>
 
       <div className="max-w-[1400px] mx-auto w-full relative z-10">
-        {/* Top line — thin separator */}
         <div
           ref={lineRef}
-          className="w-full h-px bg-thrift-border-light mb-10 origin-left"
+          className="w-full h-px bg-thrift-border mb-10 origin-left"
           style={{ transform: 'scaleX(0)' }}
         />
 
@@ -115,7 +113,7 @@ export default function Hero({ ready = true }: HeroProps) {
               <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 opacity-0">
                 <a
                   href="#shop"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-thrift-cream text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 group"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 group"
                 >
                   Explore Collection
                   <ArrowDownRight className="w-4 h-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300" />
