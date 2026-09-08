@@ -76,9 +76,9 @@ export default function DesktopNav() {
                   animation: 'dropdownIn 0.15s ease-out forwards',
                 }}
               >
-                {item.children.map((child) => (
+                {item.children.map((child, idx) => (
                   <Link
-                    key={child.href}
+                    key={`${item.label}-${idx}`}
                     href={child.href}
                     className={`block px-5 py-2.5 text-[11px] uppercase tracking-[0.12em] transition-colors duration-200 ${
                       isActive(child.href)

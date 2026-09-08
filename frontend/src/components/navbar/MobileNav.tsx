@@ -116,9 +116,9 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
                     animation: 'submenuSlide 0.2s ease-out forwards',
                   }}
                 >
-                  {item.children.map((child) => (
+                  {item.children.map((child, idx) => (
                     <Link
-                      key={child.href}
+                      key={`${item.label}-${idx}`}
                       href={child.href}
                       onClick={onClose}
                       className={`block py-2 text-sm uppercase tracking-wider transition-colors ${
