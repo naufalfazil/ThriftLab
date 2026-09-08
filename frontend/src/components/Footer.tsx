@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-thrift-darker border-t border-thrift-border">
+    <footer className="bg-white border-t border-thrift-border">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 py-16 md:py-20">
           <div className="md:col-span-5">
@@ -53,9 +53,9 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors w-full"
+                className="bg-white border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors w-full"
               />
-              <button className="bg-thrift-accent px-5 text-[10px] font-bold uppercase tracking-widest text-thrift-cream hover:bg-thrift-accent-warm transition-colors flex items-center gap-1">
+              <button className="bg-thrift-accent px-5 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-thrift-accent-warm transition-colors flex items-center gap-1">
                 Join
                 <ArrowUpRight className="w-3 h-3" />
               </button>

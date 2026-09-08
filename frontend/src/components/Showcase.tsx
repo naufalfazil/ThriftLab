@@ -7,7 +7,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 interface Product {
   id: number;
@@ -100,29 +100,29 @@ export default function Showcase() {
             key={item.id}
             className="group relative w-[260px] sm:w-[380px] lg:w-[450px] shrink-0 cursor-pointer"
           >
-            <div className="relative aspect-[3/4] overflow-hidden bg-thrift-surface">
+            <div className="relative aspect-[3/4] overflow-hidden bg-thrift-border">
               <img
                 src={item.image}
                 alt={item.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-thrift-darker/80 via-thrift-darker/20 to-transparent" />
-              <div className="absolute top-4 left-4 px-3 py-1.5 bg-thrift-accent text-[9px] font-mono uppercase tracking-wider text-thrift-cream">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              <div className="absolute top-4 left-4 px-3 py-1.5 bg-thrift-accent text-[9px] font-mono uppercase tracking-wider text-white">
                 Featured
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent">
                   {item.category}
                 </span>
-                <h3 className="text-lg sm:text-2xl font-bold uppercase tracking-tight text-thrift-cream mt-1 line-clamp-1">
+                <h3 className="text-lg sm:text-2xl font-bold uppercase tracking-tight text-white mt-1 line-clamp-1">
                   {item.name}
                 </h3>
                 <div className="flex items-center justify-between mt-3">
-                  <span className="text-sm font-bold font-mono text-thrift-cream">
+                  <span className="text-sm font-bold font-mono text-white">
                     Rp {item.price.toLocaleString('id-ID')}
                   </span>
-                  <div className="w-8 h-8 border border-thrift-border-light flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4 text-thrift-cream" />
+                  <div className="w-8 h-8 border border-white/40 flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
+                    <ArrowUpRight className="w-4 h-4 text-white" />
                   </div>
                 </div>
               </div>
