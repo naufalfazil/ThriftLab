@@ -1,9 +1,13 @@
 export interface Product {
   id: number;
   name: string;
+  slug: string;
   price: number;
   category: string;
+  subcategory: string;
   image: string;
+  sold: number;
+  createdAt: string;
   details: {
     size: string;
     condition: string;
@@ -12,484 +16,714 @@ export interface Product {
 }
 
 export const products: Product[] = [
+  // ─── TOPS ──────────────────────────────────────────────
   {
     id: 1,
     name: 'Vintage Flannel Dickies',
+    slug: 'vintage-flannel-dickies',
     price: 150000,
-    category: 'Flannel',
+    category: 'Tops',
+    subcategory: 'Flannel',
     image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop',
+    sold: 128,
+    createdAt: '2025-01-15',
     details: {
       size: 'L (72x55 cm)',
       condition: '9/10 (No minus)',
-      description: 'Flannel vintage warna merah hitam bahan tebal original.'
-    }
+      description: 'Flannel vintage warna merah-hitam dengan bahan tebal original. Cocok untuk layering musim dingin atau gaya kasual sehari-hari.',
+    },
   },
   {
     id: 2,
-    name: 'Retro Denim Jacket Levis',
-    price: 250000,
-    category: 'Denim',
-    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=600&auto=format&fit=crop',
+    name: 'Ralph Lauren Oxford Shirt',
+    slug: 'ralph-lauren-oxford-shirt',
+    price: 175000,
+    category: 'Tops',
+    subcategory: 'Shirt',
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=600&auto=format&fit=crop',
+    sold: 94,
+    createdAt: '2025-02-10',
     details: {
-      size: 'XL (75x60 cm)',
-      condition: '8.5/10 (Pudar pemakaian wajar di kerah)',
-      description: 'Jaket denim klasik washed blue, kancing lengkap.'
-    }
+      size: 'M (69x52 cm)',
+      condition: '9/10 (Kancing utuh)',
+      description: 'Kemeja oxford klasik warna biru muda. Bahan katun tebal, cocok untuk gaya smart-casual.',
+    },
   },
   {
     id: 3,
-    name: 'Vintage Graphic Tee Band',
+    name: 'Adidas Trefoil Graphic T-Shirt',
+    slug: 'adidas-trefoil-graphic-tee',
     price: 120000,
-    category: 'T-Shirt',
+    category: 'Tops',
+    subcategory: 'T-Shirt',
     image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop',
+    sold: 156,
+    createdAt: '2025-03-05',
     details: {
-      size: 'M (68x50 cm)',
+      size: 'L (72x54 cm)',
       condition: '9/10 (Sablon masih aman)',
-      description: 'Kaos band vintage bahan katun lembut.'
-    }
+      description: 'Kaos vintage Adidas dengan grafis trefoil khas era 90-an. Bahan katun lembut dan adem.',
+    },
   },
   {
     id: 4,
-    name: 'Carhartt Active Hoodie Brown',
-    price: 350000,
-    category: 'Hoodie',
-    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (74x58 cm)',
-      condition: '8/10 (Ada sedikit furing berbulu halus)',
-      description: 'Hoodie kanvas Carhartt original, hangat dan kokoh.'
-    }
-  },
-  {
-    id: 5,
-    name: 'Champion Reverse Weave Crewneck',
-    price: 220000,
-    category: 'Crewneck',
-    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'M (70x54 cm)',
-      condition: '9.5/10 (Like new)',
-      description: 'Crewneck abu-abu terang, bordir logo dada aman.'
-    }
-  },
-  {
-    id: 6,
-    name: 'Flannel Woolrich Checkered',
-    price: 160000,
-    category: 'Flannel',
-    image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'XL (76x60 cm)',
-      condition: '9/10 (Warna pekat)',
-      description: 'Flannel tebal cocok untuk riding atau cuaca dingin.'
-    }
-  },
-  {
-    id: 7,
-    name: 'Vintage Wrangler Denim Shirt',
-    price: 180000,
-    category: 'Denim',
-    image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'M (69x52 cm)',
-      condition: '9/10 (Kancing mutiara utuh)',
-      description: 'Kemeja denim Wrangler klasik warna medium wash.'
-    }
-  },
-  {
-    id: 8,
-    name: 'Stussy Basic Logo Hoodie',
-    price: 300000,
-    category: 'Hoodie',
-    image: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (72x56 cm)',
-      condition: '8.5/10 (Sablon aman minor pemakaian)',
-      description: 'Streetwear vintage Stussy hitam pekat.'
-    }
-  },
-  {
-    id: 9,
-    name: 'Nike Vintage Windbreaker',
-    price: 200000,
-    category: 'Windbreaker',
-    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (71x56 cm)',
-      condition: '9/10 (Resleting lancar)',
-      description: 'Windbreaker retro Nike warna kombinasi navy-white.'
-    }
-  },
-  {
-    id: 10,
-    name: 'Adidas Oversized Tracktop',
-    price: 240000,
-    category: 'Jacket',
-    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'XL (75x62 cm)',
-      condition: '9/10 (No bobol)',
-      description: 'Tracktop klasik garis tiga warna hijau botol.'
-    }
-  },
-  {
-    id: 11,
     name: 'Polo Ralph Lauren Cable Knit',
+    slug: 'polo-ralph-lauren-cable-knit',
     price: 280000,
-    category: 'Sweater',
+    category: 'Tops',
+    subcategory: 'Sweater',
     image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=600&auto=format&fit=crop',
+    sold: 67,
+    createdAt: '2025-01-20',
     details: {
       size: 'M (67x50 cm)',
       condition: '9.5/10 (Bahan mulus)',
-      description: 'Sweater rajut krem dengan bordir logo polo merah.'
-    }
+      description: 'Sweater rajut krem dengan bordir logo polo merah. Bahan wol tebal, cocok untuk tampilan preppy.',
+    },
   },
   {
-    id: 12,
-    name: 'Vintage Varsity Jacket Leather Sleeve',
-    price: 400000,
-    category: 'Varsity',
-    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (73x58 cm)',
-      condition: '8/10 (Kulit lengan ada kerut wajar)',
-      description: 'Varsity Amerika bahan wool tebal dengan lengan kulit asli.'
-    }
-  },
-  {
-    id: 13,
-    name: 'Pendleton Tartan Flannel',
-    price: 190000,
-    category: 'Flannel',
-    image: 'https://images.unsplash.com/photo-1578932750294-f5075e85f44a?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'M (70x52 cm)',
-      condition: '9.5/10 (Kondisi prima)',
-      description: 'Flannel wol murni brand Pendleton motif kotak hijau.'
-    }
-  },
-  {
-    id: 14,
-    name: 'Thrasher Flame Logo Tee',
-    price: 130000,
-    category: 'T-Shirt',
-    image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (72x54 cm)',
-      condition: '8.5/10 (Sablon ada retak sithik)',
-      description: 'Kaos skateboard klasik warna hitam.'
-    }
-  },
-  {
-    id: 15,
-    name: 'Patagonia Synchilla Fleece',
-    price: 320000,
-    category: 'Fleece',
-    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'M (68x53 cm)',
-      condition: '9/10 (Bulu masih padat)',
-      description: 'Fleece tebal hangat warna oatmeal original Patagonia.'
-    }
-  },
-  {
-    id: 16,
-    name: 'Bape Camo Shark Hoodie',
-    price: 450000,
-    category: 'Hoodie',
-    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (73x56 cm)',
-      condition: '9/10 (Resleting full hingga kupluk)',
-      description: 'Hoodie motif camo hijau khas streetwear.'
-    }
-  },
-  {
-    id: 17,
+    id: 5,
     name: 'Dickies Work Shirt Grey',
+    slug: 'dickies-work-shirt-grey',
     price: 140000,
-    category: 'Shirt',
-    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=600&auto=format&fit=crop',
+    category: 'Tops',
+    subcategory: 'Shirt',
+    image: 'https://images.unsplash.com/photo-1598032895397-b9472444bf93?q=80&w=600&auto=format&fit=crop',
+    sold: 88,
+    createdAt: '2025-04-12',
     details: {
       size: 'L (72x56 cm)',
       condition: '9/10 (Bahan twill kuat)',
-      description: 'Kemeja kerja Dickies abu-abu terang.'
-    }
+      description: 'Kemeja kerja Dickies abu-abu terang. Bahan twill tahan lama, cocok untuk workwear atau gaya kasual.',
+    },
   },
   {
-    id: 18,
-    name: 'Supreme Box Logo Crewneck',
-    price: 380000,
-    category: 'Crewneck',
-    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600&auto=format&fit=crop',
+    id: 6,
+    name: 'Pendleton Tartan Flannel',
+    slug: 'pendleton-tartan-flannel',
+    price: 190000,
+    category: 'Tops',
+    subcategory: 'Flannel',
+    image: 'https://images.unsplash.com/photo-1578932750294-f5075e85f44a?q=80&w=600&auto=format&fit=crop',
+    sold: 73,
+    createdAt: '2025-02-28',
     details: {
-      size: 'L (74x58 cm)',
-      condition: '9/10 (Bordir dada rapih)',
-      description: 'Crewneck Supreme warna navy edisi terbatas.'
-    }
+      size: 'M (70x52 cm)',
+      condition: '9.5/10 (Kondisi prima)',
+      description: 'Flannel wol murni brand Pendleton motif tartan hijau. Bahan tebal dan hangat.',
+    },
   },
   {
-    id: 19,
-    name: 'Vintage Oversized Striped Tee',
-    price: 95000,
-    category: 'T-Shirt',
-    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop',
+    id: 7,
+    name: 'Carhartt WIP Pocket Longsleeve',
+    slug: 'carhartt-wip-pocket-longsleeve',
+    price: 160000,
+    category: 'Tops',
+    subcategory: 'T-Shirt',
+    image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=600&auto=format&fit=crop',
+    sold: 54,
+    createdAt: '2025-05-01',
     details: {
-      size: 'XL (76x60 cm)',
-      condition: '9/10',
-      description: 'Kaos garis-garis gaya 90-an bahan adem.'
-    }
+      size: 'L (73x55 cm)',
+      condition: '9.5/10',
+      description: 'Kaos lengan panjang Carhartt WIP warna coklat tua dengan saku dada. Bahan katun tebal.',
+    },
   },
   {
-    id: 20,
-    name: 'North Face Mountain Jacket',
-    price: 420000,
-    category: 'Jacket',
-    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (73x58 cm)',
-      condition: '8.5/10 (Water repellent aman)',
-      description: 'Jaket gunung dual layer warna kuning hitam.'
-    }
-  },
-  {
-    id: 21,
+    id: 8,
     name: 'Uniqlo Flannel Check Blue',
+    slug: 'uniqlo-flannel-check-blue',
     price: 110000,
-    category: 'Flannel',
-    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop',
+    category: 'Tops',
+    subcategory: 'Flannel',
+    image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=600&auto=format&fit=crop',
+    sold: 142,
+    createdAt: '2025-03-18',
     details: {
       size: 'S (65x48 cm)',
       condition: '9.5/10 (Seperti baru)',
-      description: 'Flannel katun lembut motif kotak biru.'
-    }
+      description: 'Flannel katun lembut motif kotak biru. Ringan dan nyaman dipakai sehari-hari.',
+    },
+  },
+  {
+    id: 9,
+    name: 'Vintage Thrasher Flame Tee',
+    slug: 'vintage-thrasher-flame-tee',
+    price: 130000,
+    category: 'Tops',
+    subcategory: 'T-Shirt',
+    image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?q=80&w=600&auto=format&fit=crop',
+    sold: 118,
+    createdAt: '2025-04-05',
+    details: {
+      size: 'L (72x54 cm)',
+      condition: '8.5/10 (Sablon ada retak tipis)',
+      description: 'Kaos skateboard Thrasher klasik warna hitam dengan grafis flame ikonik.',
+    },
+  },
+  {
+    id: 10,
+    name: 'Champion Reverse Weave Crewneck',
+    slug: 'champion-reverse-weave-crewneck',
+    price: 220000,
+    category: 'Tops',
+    subcategory: 'Sweater',
+    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600&auto=format&fit=crop',
+    sold: 105,
+    createdAt: '2025-01-28',
+    details: {
+      size: 'M (70x54 cm)',
+      condition: '9.5/10 (Like new)',
+      description: 'Crewneck abu-abu terang dengan teknologi reverse weave. Bordir logo dada aman.',
+    },
+  },
+
+  // ─── BOTTOMS ───────────────────────────────────────────
+  {
+    id: 11,
+    name: "Vintage Levi's 501 Denim Jeans",
+    slug: 'vintage-levis-501-denim-jeans',
+    price: 230000,
+    category: 'Bottoms',
+    subcategory: 'Jeans',
+    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=600&auto=format&fit=crop',
+    sold: 189,
+    createdAt: '2025-01-05',
+    details: {
+      size: 'L (72x102 cm)',
+      condition: '8.5/10 (Washed natural)',
+      description: 'Jeans Levi\'s 501 vintage dengan button fly. Washed blue natural, cocok untuk gaya klasik.',
+    },
+  },
+  {
+    id: 12,
+    name: 'Carhartt Cargo Pants',
+    slug: 'carhartt-cargo-pants',
+    price: 195000,
+    category: 'Bottoms',
+    subcategory: 'Cargo',
+    image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=600&auto=format&fit=crop',
+    sold: 134,
+    createdAt: '2025-02-15',
+    details: {
+      size: 'L (74x100 cm)',
+      condition: '9/10 (No minus)',
+      description: 'Celana cargo Carhartt dengan beberapa pocket. Bahananvas tebal, tahan lama.',
+    },
+  },
+  {
+    id: 13,
+    name: 'Vintage Wrangler Denim Shirt',
+    slug: 'vintage-wrangler-denim-shirt',
+    price: 180000,
+    category: 'Tops',
+    subcategory: 'Shirt',
+    image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=600&auto=format&fit=crop',
+    sold: 76,
+    createdAt: '2025-03-22',
+    details: {
+      size: 'M (69x52 cm)',
+      condition: '9/10 (Kancing mutiara utuh)',
+      description: 'Kemeja denim Wrangler klasik warna medium wash. Cocok untuk layering atau dipakai sendiri.',
+    },
+  },
+  {
+    id: 14,
+    name: 'Relaxed Fit Chino Pants',
+    slug: 'relaxed-fit-chino-pants',
+    price: 145000,
+    category: 'Bottoms',
+    subcategory: 'Trousers',
+    image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=600&auto=format&fit=crop',
+    sold: 62,
+    createdAt: '2025-05-10',
+    details: {
+      size: 'M (70x98 cm)',
+      condition: '9/10',
+      description: 'Celana chino relaxed fit warna khaki. Bahan katun nyaman, cocok untuk gaya smart-casual.',
+    },
+  },
+  {
+    id: 15,
+    name: 'Vintage Denim Shorts',
+    slug: 'vintage-denim-shorts',
+    price: 95000,
+    category: 'Bottoms',
+    subcategory: 'Shorts',
+    image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=600&auto=format&fit=crop',
+    sold: 48,
+    createdAt: '2025-06-01',
+    details: {
+      size: 'M (46x52 cm)',
+      condition: '8.5/10',
+      description: 'Shorts denim vintage dengan potongan mid-length. Washed blue, cocok untuk cuaca panas.',
+    },
+  },
+
+  // ─── OUTERWEAR ─────────────────────────────────────────
+  {
+    id: 16,
+    name: 'Retro Denim Jacket Levis',
+    slug: 'retro-denim-jacket-levis',
+    price: 250000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=600&auto=format&fit=crop',
+    sold: 145,
+    createdAt: '2025-01-10',
+    details: {
+      size: 'XL (75x60 cm)',
+      condition: '8.5/10 (Pudar pemakaian wajar di kerah)',
+      description: 'Jaket denim klasik Levis washed blue. Kancing lengkap, cocok untuk layering.',
+    },
+  },
+  {
+    id: 17,
+    name: 'Carhartt Active Hoodie Brown',
+    slug: 'carhartt-active-hoodie-brown',
+    price: 350000,
+    category: 'Outerwear',
+    subcategory: 'Hoodie',
+    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop',
+    sold: 98,
+    createdAt: '2025-02-05',
+    details: {
+      size: 'L (74x58 cm)',
+      condition: '8/10 (Ada sedikit furing berbulu halus)',
+      description: 'Hoodie kanvas Carhartt original warna coklat. Hangat dan kokoh, cocok untuk outdoor.',
+    },
+  },
+  {
+    id: 18,
+    name: 'Stussy Basic Logo Hoodie',
+    slug: 'stussy-basic-logo-hoodie',
+    price: 300000,
+    category: 'Outerwear',
+    subcategory: 'Hoodie',
+    image: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=600&auto=format&fit=crop',
+    sold: 112,
+    createdAt: '2025-03-10',
+    details: {
+      size: 'L (72x56 cm)',
+      condition: '8.5/10 (Sablon aman, minor pemakaian)',
+      description: 'Hoodie streetwear Stussy hitam pekat. Logo besar di dada, gaya urban klasik.',
+    },
+  },
+  {
+    id: 19,
+    name: 'Nike Vintage Windbreaker',
+    slug: 'nike-vintage-windbreaker',
+    price: 200000,
+    category: 'Outerwear',
+    subcategory: 'Windbreaker',
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop&auto=format',
+    sold: 87,
+    createdAt: '2025-01-25',
+    details: {
+      size: 'L (71x56 cm)',
+      condition: '9/10 (Resleting lancar)',
+      description: 'Windbreaker retro Nike warna kombinasi navy-white. Ringan dan tahan angin.',
+    },
+  },
+  {
+    id: 20,
+    name: 'Adidas Oversized Tracktop',
+    slug: 'adidas-oversized-tracktop',
+    price: 240000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop',
+    sold: 79,
+    createdAt: '2025-04-08',
+    details: {
+      size: 'XL (75x62 cm)',
+      condition: '9/10 (No bobol)',
+      description: 'Tracktop klasik Adidas garis tiga warna hijau botol. Potongan oversized.',
+    },
+  },
+  {
+    id: 21,
+    name: 'Patagonia Synchilla Fleece',
+    slug: 'patagonia-synchilla-fleece',
+    price: 320000,
+    category: 'Outerwear',
+    subcategory: 'Sweater',
+    image: 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?q=80&w=600&auto=format&fit=crop',
+    sold: 56,
+    createdAt: '2025-02-20',
+    details: {
+      size: 'M (68x53 cm)',
+      condition: '9/10 (Bulu masih padat)',
+      description: 'Fleece tebal hangat warna oatmeal original Patagonia. Cocok untuk outdoor activity.',
+    },
   },
   {
     id: 22,
-    name: 'Vintage Converse Crewneck',
-    price: 170000,
-    category: 'Crewneck',
-    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600&auto=format&fit=crop',
+    name: 'Bape Camo Shark Hoodie',
+    slug: 'bape-camo-shark-hoodie',
+    price: 450000,
+    category: 'Outerwear',
+    subcategory: 'Hoodie',
+    image: 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=600&h=800&fit=crop&auto=format',
+    sold: 34,
+    createdAt: '2025-05-15',
     details: {
-      size: 'M (68x52 cm)',
-      condition: '9/10',
-      description: 'Crewneck merah maroon sablon dada vintage.'
-    }
+      size: 'L (73x56 cm)',
+      condition: '9/10 (Resleting full hingga kupluk)',
+      description: 'Hoodie motif camo hijau khas streetwear. Zip-up hingga wajah, edisi terbatas.',
+    },
   },
   {
     id: 23,
-    name: 'Gap Vintage Denim Trucker',
-    price: 210000,
-    category: 'Denim',
-    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=600&auto=format&fit=crop',
+    name: 'North Face Mountain Jacket',
+    slug: 'north-face-mountain-jacket',
+    price: 420000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600&auto=format&fit=crop',
+    sold: 41,
+    createdAt: '2025-03-01',
     details: {
-      size: 'M (68x52 cm)',
-      condition: '9/10 (Warna medium wash)',
-      description: 'Jaket trucker denim Gap potongan klasik.'
-    }
+      size: 'L (73x58 cm)',
+      condition: '8.5/10 (Water repellent aman)',
+      description: 'Jaket gunung dual layer warna kuning-hitam. Tahan air, cocok untuk aktivitas outdoor.',
+    },
   },
   {
     id: 24,
     name: 'Nike Vintage Swoosh Hoodie',
+    slug: 'nike-vintage-swoosh-hoodie',
     price: 260000,
-    category: 'Hoodie',
-    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop',
+    category: 'Outerwear',
+    subcategory: 'Hoodie',
+    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=600&auto=format&fit=crop',
+    sold: 93,
+    createdAt: '2025-04-20',
     details: {
       size: 'XL (75x61 cm)',
       condition: '8.5/10',
-      description: 'Hoodie navy dengan bordir logo nike kecil di dada.'
-    }
+      description: 'Hoodie navy dengan bordir logo Nike kecil di dada. Potongan klasik, nyaman dipakai.',
+    },
   },
   {
     id: 25,
-    name: 'Harley Davidson Vintage Tee',
-    price: 180000,
-    category: 'T-Shirt',
-    image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=600&auto=format&fit=crop',
+    name: 'Columbia Puffer Jacket',
+    slug: 'columbia-puffer-jacket',
+    price: 350000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1544923246-77307dd270cb?q=80&w=600&auto=format&fit=crop',
+    sold: 68,
+    createdAt: '2025-01-30',
     details: {
-      size: 'L (72x55 cm)',
-      condition: '8/10 (Single stitch, wash faded)',
-      description: 'Kaos motor klasik abu-abu tua.'
-    }
+      size: 'L (72x57 cm)',
+      condition: '9/10 (Bulu angsa masih tebal)',
+      description: 'Jaket puffer musim dingin empuk warna hitam pekat. Isi bulu angsa, hangat maksimal.',
+    },
   },
   {
     id: 26,
-    name: 'Columbia Puffer Jacket',
-    price: 350000,
-    category: 'Jacket',
-    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (72x57 cm)',
-      condition: '9/10 (Minus bulu angsa masih tebal)',
-      description: 'Jaket musim dingin empuk warna hitam pekat.'
-    }
-  },
-  {
-    id: 27,
-    name: 'Zara Man Wool Coat Vintage',
-    price: 390000,
-    category: 'Coat',
-    image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (76x56 cm)',
-      condition: '9.5/10',
-      description: 'Long coat bahan wol warna charcoal elegan.'
-    }
-  },
-  {
-    id: 28,
     name: 'H&M Oversized Hoodie Beige',
+    slug: 'hm-oversized-hoodie-beige',
     price: 150000,
-    category: 'Hoodie',
-    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop',
+    category: 'Tops',
+    subcategory: 'Hoodie',
+    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&h=800&fit=crop&auto=format',
+    sold: 167,
+    createdAt: '2025-05-20',
     details: {
       size: 'M (69x54 cm)',
       condition: '9/10',
-      description: 'Hoodie warna krem polos bahan fleece lembut.'
-    }
+      description: 'Hoodie warna krem polos bahan fleece lembut. Potongan oversized, nyaman sehari-hari.',
+    },
   },
   {
-    id: 29,
+    id: 27,
     name: 'Vintage Polo Sport Windbreaker',
+    slug: 'vintage-polo-sport-windbreaker',
     price: 270000,
-    category: 'Windbreaker',
-    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600&auto=format&fit=crop',
+    category: 'Outerwear',
+    subcategory: 'Windbreaker',
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop&auto=format',
+    sold: 52,
+    createdAt: '2025-02-12',
     details: {
       size: 'L (72x58 cm)',
       condition: '8.5/10',
-      description: 'Windbreaker retro colorblock merah putih biru.'
-    }
+      description: 'Windbreaker retro colorblock merah-putih-biru. Gaya sporty vintage.',
+    },
   },
   {
-    id: 30,
-    name: 'Reebok Classic Vector Crewneck',
-    price: 190000,
-    category: 'Crewneck',
-    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'M (68x53 cm)',
-      condition: '9/10',
-      description: 'Crewneck hitam dengan bordir logo besar di dada.'
-    }
-  },
-  {
-    id: 31,
-    name: 'Flannel Herning Heavy Duty',
-    price: 165000,
-    category: 'Flannel',
-    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (73x56 cm)',
-      condition: '9/10',
-      description: 'Flannel bahan tebal warna mustard kombinasi navy.'
-    }
-  },
-  {
-    id: 32,
-    name: 'Supreme Pocket Tee White',
-    price: 170000,
-    category: 'T-Shirt',
-    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'M (68x51 cm)',
-      condition: '8.5/10 (Putih bersih)',
-      description: 'Kaos polos putih dengan saku dada berlogo kecil.'
-    }
-  },
-  {
-    id: 33,
-    name: 'Wrangler Sherpa Denim Jacket',
-    price: 310000,
-    category: 'Denim',
-    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (72x57 cm)',
-      condition: '9/10 (Bulu sherpa dalam putih bersih)',
-      description: 'Jaket denim berbulu hangat di bagian kerah dan badan.'
-    }
-  },
-  {
-    id: 34,
+    id: 28,
     name: 'Adidas Vintage Trefoil Hoodie',
+    slug: 'adidas-vintage-trefoil-hoodie',
     price: 230000,
-    category: 'Hoodie',
-    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop',
+    category: 'Tops',
+    subcategory: 'Hoodie',
+    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&h=800&fit=crop&auto=format',
+    sold: 84,
+    createdAt: '2025-03-28',
     details: {
       size: 'M (69x53 cm)',
       condition: '9/10',
-      description: 'Hoodie biru dongker logo trefoil besar di depan.'
-    }
+      description: 'Hoodie biru dongker dengan logo trefoil besar di depan. Gaya retro khas Adidas.',
+    },
   },
   {
-    id: 35,
-    name: 'Vintage Acid Wash Jeans Jacket',
-    price: 240000,
-    category: 'Denim',
-    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (71x56 cm)',
-      condition: '9/10',
-      description: 'Jaket denim motif acid wash khas era 80an.'
-    }
-  },
-  {
-    id: 36,
-    name: 'Carhartt WIP Pocket Longsleeve',
-    price: 160000,
-    category: 'T-Shirt',
-    image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (73x55 cm)',
-      condition: '9.5/10',
-      description: 'Kaos lengan panjang coklat tua bahan katun tebal.'
-    }
-  },
-  {
-    id: 37,
-    name: 'Nike ACG Fleece Pullover',
-    price: 340000,
-    category: 'Fleece',
-    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'L (72x57 cm)',
-      condition: '9/10',
-      description: 'Fleece outdoor sub-brand Nike ACG warna ungu tua.'
-    }
-  },
-  {
-    id: 38,
-    name: 'Vintage Checkered Wool Shirt',
-    price: 175000,
-    category: 'Flannel',
-    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop',
-    details: {
-      size: 'XL (77x61 cm)',
-      condition: '9/10',
-      description: 'Kemeja wol tebal motif kotak besar warna merah.'
-    }
-  },
-  {
-    id: 39,
+    id: 29,
     name: 'Champion Basic Zip Hoodie',
+    slug: 'champion-basic-zip-hoodie',
     price: 250000,
-    category: 'Hoodie',
-    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop',
+    category: 'Tops',
+    subcategory: 'Hoodie',
+    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&h=800&fit=crop&auto=format',
+    sold: 71,
+    createdAt: '2025-04-15',
     details: {
       size: 'M (68x53 cm)',
       condition: '9/10',
-      description: 'Hoodie menggunakan resleting depan warna abu-abu misty.'
-    }
+      description: 'Hoodie zip Champion warna abu-abu misty. Resleting depan, praktis dan serbaguna.',
+    },
   },
   {
-    id: 40,
+    id: 30,
+    name: 'Zara Man Wool Coat',
+    slug: 'zara-man-wool-coat',
+    price: 390000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=600&auto=format&fit=crop',
+    sold: 38,
+    createdAt: '2025-01-18',
+    details: {
+      size: 'L (76x56 cm)',
+      condition: '9.5/10',
+      description: 'Long coat bahan wol warna charcoal. Potongan elegan, cocok untuk tampilan formal.',
+    },
+  },
+  {
+    id: 31,
+    name: 'Wrangler Sherpa Denim Jacket',
+    slug: 'wrangler-sherpa-denim-jacket',
+    price: 310000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&h=800&fit=crop&auto=format',
+    sold: 63,
+    createdAt: '2025-03-15',
+    details: {
+      size: 'L (72x57 cm)',
+      condition: '9/10 (Bulu sherpa putih bersih)',
+      description: 'Jaket denim berbulu hangat di bagian kerah dan badan. Cocok untuk musim dingin.',
+    },
+  },
+  {
+    id: 32,
+    name: 'Vintage Acid Wash Jeans Jacket',
+    slug: 'vintage-acid-wash-jeans-jacket',
+    price: 240000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&h=800&fit=crop&auto=format',
+    sold: 47,
+    createdAt: '2025-05-08',
+    details: {
+      size: 'L (71x56 cm)',
+      condition: '9/10',
+      description: 'Jaket denim motif acid wash khas era 80-an. Gaya retro yang bold.',
+    },
+  },
+  {
+    id: 33,
+    name: 'Nike ACG Fleece Pullover',
+    slug: 'nike-acg-fleece-pullover',
+    price: 340000,
+    category: 'Outerwear',
+    subcategory: 'Sweater',
+    image: 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=600&h=800&fit=crop&auto=format',
+    sold: 29,
+    createdAt: '2025-06-10',
+    details: {
+      size: 'L (72x57 cm)',
+      condition: '9/10',
+      description: 'Fleece outdoor sub-brand Nike ACG warna ungu tua. Dirancang untuk aktivitas outdoor.',
+    },
+  },
+  {
+    id: 34,
+    name: 'Gap Vintage Denim Trucker',
+    slug: 'gap-vintage-denim-trucker',
+    price: 210000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&h=800&fit=crop&auto=format',
+    sold: 59,
+    createdAt: '2025-02-25',
+    details: {
+      size: 'M (68x52 cm)',
+      condition: '9/10 (Warna medium wash)',
+      description: 'Jaket trucker denim Gap potongan klasik. Cocok untuk layering atau dipakai sendiri.',
+    },
+  },
+
+  {
+    id: 35,
     name: 'Vintage MLB Yankees Varsity',
+    slug: 'vintage-mlb-yankees-varsity',
     price: 430000,
-    category: 'Varsity',
-    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop',
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=800&fit=crop&auto=format',
+    sold: 22,
+    createdAt: '2025-01-08',
     details: {
       size: 'L (74x59 cm)',
       condition: '9/10 (Bordir logo Yankees timbul)',
-      description: 'Jaket varsity baseball original New York Yankees.'
-    }
-  }
+      description: 'Jaket varsity baseball original New York Yankees. Wool tebal dengan lengan kulit.',
+    },
+  },
+  {
+    id: 36,
+    name: 'Vintage Varsity Jacket Leather Sleeve',
+    slug: 'vintage-varsity-jacket-leather-sleeve',
+    price: 400000,
+    category: 'Outerwear',
+    subcategory: 'Jacket',
+    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=800&fit=crop&auto=format',
+    sold: 31,
+    createdAt: '2025-04-02',
+    details: {
+      size: 'L (73x58 cm)',
+      condition: '8/10 (Kulit lengan ada kerut wajar)',
+      description: 'Varsity Amerika bahan wool tebal dengan lengan kulit asli. Gaya Americana klasik.',
+    },
+  },
+  {
+    id: 37,
+    name: 'Supreme Box Logo Crewneck',
+    slug: 'supreme-box-logo-crewneck',
+    price: 380000,
+    category: 'Tops',
+    subcategory: 'Sweater',
+    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop&auto=format',
+    sold: 18,
+    createdAt: '2025-05-25',
+    details: {
+      size: 'L (74x58 cm)',
+      condition: '9/10 (Bordir dada rapi)',
+      description: 'Crewneck Supreme warna navy edisi terbatas. Box logo ikonik di dada.',
+    },
+  },
+  {
+    id: 38,
+    name: 'Vintage Converse Crewneck',
+    slug: 'vintage-converse-crewneck',
+    price: 170000,
+    category: 'Tops',
+    subcategory: 'Sweater',
+    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop&auto=format',
+    sold: 45,
+    createdAt: '2025-03-12',
+    details: {
+      size: 'M (68x52 cm)',
+      condition: '9/10',
+      description: 'Crewneck merah maroon dengan sablon dada vintage Converse. Gaya retro kasual.',
+    },
+  },
+  {
+    id: 39,
+    name: 'Reebok Classic Vector Crewneck',
+    slug: 'reebok-classic-vector-crewneck',
+    price: 190000,
+    category: 'Tops',
+    subcategory: 'Sweater',
+    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop&auto=format',
+    sold: 37,
+    createdAt: '2025-04-28',
+    details: {
+      size: 'M (68x53 cm)',
+      condition: '9/10',
+      description: 'Crewneck hitam dengan bordir logo vector besar Reebok di dada.',
+    },
+  },
+  {
+    id: 40,
+    name: 'Harley Davidson Vintage Tee',
+    slug: 'harley-davidson-vintage-tee',
+    price: 180000,
+    category: 'Tops',
+    subcategory: 'T-Shirt',
+    image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&h=800&fit=crop&auto=format',
+    sold: 91,
+    createdAt: '2025-02-08',
+    details: {
+      size: 'L (72x55 cm)',
+      condition: '8/10 (Single stitch, wash faded)',
+      description: 'Kaos motor klasik abu-abu tua. Single stitch vintage, warna sudah fade natural.',
+    },
+  },
+  {
+    id: 41,
+    name: 'Supreme Pocket Tee White',
+    slug: 'supreme-pocket-tee-white',
+    price: 170000,
+    category: 'Tops',
+    subcategory: 'T-Shirt',
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&h=800&fit=crop&auto=format',
+    sold: 103,
+    createdAt: '2025-03-08',
+    details: {
+      size: 'M (68x51 cm)',
+      condition: '8.5/10 (Putih bersih)',
+      description: 'Kaos polos putih dengan saku dada berlogo kecil Supreme. Minimalis dan versatile.',
+    },
+  },
+  {
+    id: 42,
+    name: 'Vintage Oversized Striped Tee',
+    slug: 'vintage-oversized-striped-tee',
+    price: 95000,
+    category: 'Tops',
+    subcategory: 'T-Shirt',
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&h=800&fit=crop&auto=format',
+    sold: 136,
+    createdAt: '2025-04-22',
+    details: {
+      size: 'XL (76x60 cm)',
+      condition: '9/10',
+      description: 'Kaos garis-garis gaya 90-an bahan adem. Potongan oversized, nyaman untuk casual.',
+    },
+  },
+  {
+    id: 43,
+    name: 'Flannel Herning Heavy Duty',
+    slug: 'flannel-herning-heavy-duty',
+    price: 165000,
+    category: 'Tops',
+    subcategory: 'Flannel',
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop&auto=format',
+    sold: 69,
+    createdAt: '2025-05-05',
+    details: {
+      size: 'L (73x56 cm)',
+      condition: '9/10',
+      description: 'Flannel bahan tebal warna mustard kombinasi navy. Heavy duty, tahan lama.',
+    },
+  },
+  {
+    id: 44,
+    name: 'Vintage Checkered Wool Shirt',
+    slug: 'vintage-checkered-wool-shirt',
+    price: 175000,
+    category: 'Tops',
+    subcategory: 'Flannel',
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop&auto=format',
+    sold: 58,
+    createdAt: '2025-06-05',
+    details: {
+      size: 'XL (77x61 cm)',
+      condition: '9/10',
+      description: 'Kemeja wol tebal motif kotak besar warna merah. Cocok untuk cuaca dingin.',
+    },
+  },
 ];

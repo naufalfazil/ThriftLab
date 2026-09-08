@@ -72,9 +72,6 @@ export default function PageLoader({ onComplete }: { onComplete: () => void }) {
         <span className="text-xs font-mono text-thrift-text-muted tabular-nums w-8">{progress}</span>
       </div>
 
-      <p className="mt-6 text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted">
-        Arsip Terpilih
-      </p>
     </div>
   );
 }

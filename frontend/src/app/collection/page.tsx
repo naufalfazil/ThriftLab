@@ -8,15 +8,10 @@ import { ArrowUpRight } from 'lucide-react';
 
 const categoryFilters = [
   'Semua',
-  'Flannel',
-  'Denim',
-  'Hoodie',
-  'T-Shirt',
-  'Crewneck',
-  'Jacket',
-  'Varsity',
-  'Windbreaker',
-  'Fleece',
+  'Tops',
+  'Bottoms',
+  'Outerwear',
+  'Accessories',
 ];
 
 function ProductSkeleton() {
@@ -48,7 +43,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="pt-4 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">
-            {product.category} &middot; {product.details.size}
+            {product.subcategory} &middot; {product.details.size}
           </p>
           <h3 className="text-[15px] font-semibold uppercase tracking-tight text-thrift-text truncate">
             {product.name}

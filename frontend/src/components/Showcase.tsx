@@ -13,9 +13,13 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 interface Product {
   id: number;
   name: string;
+  slug: string;
   price: number;
   category: string;
+  subcategory: string;
   image: string;
+  sold: number;
+  createdAt: string;
   details: {
     size: string;
     condition: string;
@@ -34,11 +38,10 @@ export default function Showcase() {
   const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/products`)
+    fetch(`${API_URL}/api/products/best-sellers`)
       .then((res) => res.json())
       .then((data: Product[]) => {
-        const picks = [0, 3, 11, 7].map((i) => data[i]).filter(Boolean);
-        setFeatured(picks);
+        setFeatured(data.slice(0, 4));
       })
       .catch(() => {});
   }, []);
@@ -139,7 +142,7 @@ export default function Showcase() {
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent">
-                  {item.category}
+                  {item.subcategory}
                 </span>
                 <h3 className="text-lg sm:text-2xl font-bold uppercase tracking-tight text-white mt-1 line-clamp-1">
                   {item.name}

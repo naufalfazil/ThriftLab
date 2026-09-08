@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { fetchProducts, getCategories, type CategoryGroup } from '@/lib/api';
+import { fetchCategories, type CategoryGroup } from '@/lib/api';
 import { ArrowUpRight } from 'lucide-react';
 
 export default function CategoriesPage() {
@@ -10,9 +10,9 @@ export default function CategoriesPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProducts()
+    fetchCategories()
       .then((data) => {
-        setCategories(getCategories(data));
+        setCategories(data);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -74,6 +74,18 @@ export default function CategoriesPage() {
                       <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mt-1">
                         {cat.name}
                       </h2>
+                      {cat.subcategories && cat.subcategories.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {cat.subcategories.map((sub) => (
+                            <span
+                              key={sub.slug}
+                              className="text-[9px] font-mono uppercase tracking-wider text-white/60 border border-white/20 px-2 py-0.5"
+                            >
+                              {sub.name} ({sub.count})
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <div className="w-10 h-10 border border-white/40 flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
                       <ArrowUpRight className="w-4 h-4 text-white" />

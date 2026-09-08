@@ -10,14 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-  image: string;
-}
-
 interface CategoryGroup {
   name: string;
   slug: string;
@@ -32,28 +24,10 @@ export default function Categories() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/products`)
+    fetch(`${API_URL}/api/products/categories`)
       .then((res) => res.json())
-      .then((data: Product[]) => {
-        const groupMap = new Map<string, { count: number; image: string }>();
-        data.forEach((p) => {
-          const existing = groupMap.get(p.category);
-          if (existing) {
-            existing.count++;
-          } else {
-            groupMap.set(p.category, { count: 1, image: p.image });
-          }
-        });
-        const groups: CategoryGroup[] = Array.from(groupMap.entries())
-          .map(([name, { count, image }]) => ({
-            name,
-            slug: name.toLowerCase().replace(/\s+/g, '-'),
-            count,
-            image,
-          }))
-          .sort((a, b) => b.count - a.count)
-          .slice(0, 6);
-        setCategories(groups);
+      .then((data: CategoryGroup[]) => {
+        setCategories(data.slice(0, 6));
       })
       .catch(() => {});
   }, []);

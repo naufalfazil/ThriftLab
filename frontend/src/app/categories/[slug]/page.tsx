@@ -24,7 +24,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="pt-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">
-            {product.category} &middot; {product.details.size}
+            {product.subcategory} &middot; {product.details.size}
           </p>
           <h3 className="text-sm font-semibold uppercase tracking-tight text-thrift-text truncate">
             {product.name}
@@ -50,13 +50,10 @@ export default function CategoryDetailPage() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    fetchProducts()
+    fetchProducts({ category: categoryName })
       .then((data) => {
-        const filtered = data.filter(
-          (p) => p.category.toLowerCase().replace(/\s+/g, '-') === slug.toLowerCase()
-        );
-        if (filtered.length > 0) {
-          setProducts(filtered);
+        if (data.length > 0) {
+          setProducts(data);
         } else {
           setNotFound(true);
         }
@@ -66,7 +63,7 @@ export default function CategoryDetailPage() {
         setNotFound(true);
         setLoading(false);
       });
-  }, [slug]);
+  }, [slug, categoryName]);
 
   return (
     <section className="pt-28 pb-24 sm:pt-32 sm:pb-32 px-6 lg:px-10">

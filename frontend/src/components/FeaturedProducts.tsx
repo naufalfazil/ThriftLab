@@ -11,9 +11,13 @@ gsap.registerPlugin(ScrollTrigger);
 interface Product {
   id: number;
   name: string;
+  slug: string;
   price: number;
   category: string;
+  subcategory: string;
   image: string;
+  sold: number;
+  createdAt: string;
   details: {
     size: string;
     condition: string;
@@ -25,13 +29,10 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 const categories = [
   'Semua',
-  'Flannel',
-  'Denim',
-  'Hoodie',
-  'T-Shirt',
-  'Crewneck',
-  'Jacket',
-  'Varsity',
+  'Tops',
+  'Bottoms',
+  'Outerwear',
+  'Accessories',
 ];
 
 function ProductSkeleton({ featured = false }: { featured?: boolean }) {
@@ -70,7 +71,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       <div className="pt-4 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">
-            {product.category} &middot; {product.details.size}
+            {product.subcategory} &middot; {product.details.size}
           </p>
           <h3 className="text-[15px] font-semibold uppercase tracking-tight text-thrift-text truncate">
             {product.name}
@@ -110,7 +111,7 @@ function FeaturedCard({ product }: { product: Product }) {
         <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
           <div className="min-w-0">
             <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-white/70 mb-2">
-              {product.category} &middot; {product.details.size} &middot; {product.details.condition}
+              {product.subcategory} &middot; {product.details.size} &middot; {product.details.condition}
             </p>
             <h3 className="text-2xl sm:text-3xl font-bold uppercase tracking-[-0.02em] text-white leading-none mb-2">
               {product.name}

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { fetchProducts, type Product } from '@/lib/api';
+import { fetchProductById, type Product } from '@/lib/api';
 import { ArrowUpRight } from 'lucide-react';
 
 function ProductSkeleton() {
@@ -30,19 +30,17 @@ export default function ProductDetailPage() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    fetchProducts()
+    const productId = Number(id);
+    if (isNaN(productId)) {
+      setNotFound(true);
+      setLoading(false);
+      return;
+    }
+
+    fetchProductById(productId)
       .then((data) => {
-        const found = data.find((p) => p.id === Number(id));
-        if (found) {
-          setProduct(found);
-          setRelated(
-            data
-              .filter((p) => p.category === found.category && p.id !== found.id)
-              .slice(0, 4)
-          );
-        } else {
-          setNotFound(true);
-        }
+        setProduct(data.product);
+        setRelated(data.related);
         setLoading(false);
       })
       .catch(() => {
@@ -84,6 +82,10 @@ export default function ProductDetailPage() {
             Koleksi
           </Link>
           <span className="mx-2">/</span>
+          <Link href={`/categories/${product.category.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-thrift-cream transition-colors">
+            {product.category}
+          </Link>
+          <span className="mx-2">/</span>
           <span className="text-thrift-cream">{product.name}</span>
         </nav>
 
@@ -100,12 +102,18 @@ export default function ProductDetailPage() {
           </div>
 
           <div className="flex flex-col justify-center py-4">
-            <Link
-              href={`/categories/${product.category.toLowerCase().replace(/\s+/g, '-')}`}
-              className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent mb-4 inline-block hover:underline"
-            >
-              {product.category}
-            </Link>
+            <div className="flex items-center gap-3 mb-4">
+              <Link
+                href={`/categories/${product.category.toLowerCase().replace(/\s+/g, '-')}`}
+                className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent hover:underline"
+              >
+                {product.category}
+              </Link>
+              <span className="text-[10px] font-mono text-thrift-text-muted">/</span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-text-muted">
+                {product.subcategory}
+              </span>
+            </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-[-0.03em] text-thrift-cream leading-tight mb-4">
               {product.name}
             </h1>
@@ -127,6 +135,24 @@ export default function ProductDetailPage() {
                   Kondisi
                 </p>
                 <p className="text-sm text-thrift-cream font-medium">{product.details.condition}</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">
+                  Terjual
+                </p>
+                <p className="text-sm text-thrift-cream font-medium">{product.sold} item</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">
+                  Ditambahkan
+                </p>
+                <p className="text-sm text-thrift-cream font-medium">
+                  {new Date(product.createdAt).toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
               </div>
             </div>
 
@@ -170,7 +196,7 @@ export default function ProductDetailPage() {
                   </div>
                   <div className="pt-3">
                     <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">
-                      {item.category}
+                      {item.subcategory}
                     </p>
                     <h3 className="text-sm font-semibold uppercase tracking-tight text-thrift-text truncate">
                       {item.name}
