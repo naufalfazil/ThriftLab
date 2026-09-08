@@ -23,7 +23,7 @@ interface Product {
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 const categories = [
-  'All',
+  'Semua',
   'Flannel',
   'Denim',
   'Hoodie',
@@ -102,7 +102,7 @@ function FeaturedCard({ product }: { product: Product }) {
         <div className="absolute top-6 left-6 flex items-center gap-3">
           <span className="text-[10px] font-mono text-white/70">01</span>
           <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent">
-            Featured Pick
+            Pilihan Utama
           </span>
         </div>
 
@@ -129,7 +129,7 @@ function FeaturedCard({ product }: { product: Product }) {
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [selected, setSelected] = useState('All');
+  const [selected, setSelected] = useState('Semua');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -138,7 +138,7 @@ export default function FeaturedProducts() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   const filtered = useMemo(() => {
-    if (selected === 'All') return products;
+    if (selected === 'Semua') return products;
     return products.filter((p) => p.category.toLowerCase() === selected.toLowerCase());
   }, [selected, products]);
 
@@ -220,14 +220,14 @@ export default function FeaturedProducts() {
       <div className="max-w-[1400px] mx-auto">
         <div ref={headingRef} className="mb-14">
           <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-accent mb-4">
-            {'// Curated Stock & Archives'}
+            {'// Stok & Arsip Terpilih'}
           </p>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] text-thrift-cream">
-              Latest Finds
+              Temuan Terbaru
             </h2>
             <p className="text-sm text-thrift-text-muted max-w-xs sm:text-right">
-              Filter through our extensive archives by category.
+              Filter arsip kami yang luas berdasarkan kategori.
             </p>
           </div>
         </div>
@@ -240,7 +240,7 @@ export default function FeaturedProducts() {
             <button
               key={cat}
               onClick={() => setSelected(cat)}
-              className={`px-4 py-2 text-[10px] font-mono uppercase tracking-[0.12em] border transition-all duration-300 shrink-0 ${
+              className={`px-4 py-2 text-[10px] font-mono uppercase tracking-[0.12em] border transition-all duration-300 shrink-0 cursor-pointer ${
                 selected === cat
                   ? 'bg-thrift-accent border-thrift-accent text-white'
                   : 'border-thrift-border text-thrift-text-muted hover:border-thrift-border-light hover:text-thrift-cream'
@@ -261,28 +261,28 @@ export default function FeaturedProducts() {
         ) : error ? (
           <div className="text-center py-24 border border-thrift-border bg-thrift-surface">
             <p className="text-sm text-thrift-text-muted font-mono mb-2">
-              Unable to load products.
+              Gagal memuat produk.
             </p>
             <p className="text-xs text-thrift-text-muted mb-6">
-              Make sure the backend server is running on port 5000.
+              Pastikan server backend berjalan di port 5000.
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="text-xs uppercase tracking-widest text-thrift-accent hover:underline"
+              className="text-xs uppercase tracking-widest text-thrift-accent hover:underline cursor-pointer"
             >
-              Try Again
+              Coba Lagi
             </button>
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-24 border border-thrift-border bg-thrift-surface">
             <p className="text-sm text-thrift-text-muted font-mono mb-2">
-              No products found in this category.
+              Tidak ada produk ditemukan di kategori ini.
             </p>
             <button
-              onClick={() => setSelected('All')}
-              className="text-xs uppercase tracking-widest text-thrift-accent hover:underline mt-2"
+              onClick={() => setSelected('Semua')}
+              className="text-xs uppercase tracking-widest text-thrift-accent hover:underline mt-2 cursor-pointer"
             >
-              View All
+              Lihat Semua
             </button>
           </div>
         ) : (

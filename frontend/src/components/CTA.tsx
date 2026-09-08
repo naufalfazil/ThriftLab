@@ -52,6 +52,11 @@ export default function CTA() {
     return () => ctx.revert();
   }, []);
 
+  const handleShopNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    alert('Silakan login terlebih dahulu untuk melakukan pemesanan.');
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -79,7 +84,8 @@ export default function CTA() {
         <a
           ref={btnRef}
           href="#shop"
-          className="inline-flex items-center gap-3 px-10 py-5 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-thrift-accent-warm transition-all duration-500 group"
+          onClick={handleShopNow}
+          className="inline-flex items-center gap-3 px-10 py-5 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-thrift-accent-warm transition-all duration-500 group cursor-pointer"
         >
           Eksplor Katalog
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />

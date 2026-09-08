@@ -27,6 +27,10 @@ export default function Showcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
     fetch(`${API_URL}/api/products`)
@@ -40,7 +44,7 @@ export default function Showcase() {
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced || !trackRef.current || featured.length === 0) return;
+    if (prefersReduced || featured.length === 0) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -57,44 +61,61 @@ export default function Showcase() {
           },
         }
       );
-
-      const totalScroll = trackRef.current!.scrollWidth - trackRef.current!.clientWidth;
-      if (totalScroll > 0) {
-        gsap.to(trackRef.current, {
-          x: -totalScroll,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 20%',
-            end: 'bottom 80%',
-            scrub: 1,
-          },
-        });
-      }
     }, sectionRef);
 
     return () => ctx.revert();
   }, [featured]);
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!trackRef.current) return;
+    isDragging.current = true;
+    setDragging(true);
+    startX.current = e.pageX - trackRef.current.offsetLeft;
+    scrollLeft.current = trackRef.current.scrollLeft;
+    trackRef.current.style.cursor = 'grabbing';
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !trackRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - trackRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    trackRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    setDragging(false);
+    if (trackRef.current) trackRef.current.style.cursor = 'grab';
+  };
+
   if (featured.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="py-20 sm:py-28 overflow-hidden">
+    <section ref={sectionRef} className="py-20 sm:py-28">
       <div ref={headingRef} className="px-6 lg:px-10 max-w-[1400px] mx-auto mb-12 opacity-0 flex items-end justify-between">
         <div>
           <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-accent mb-4">
-            {"// Editor's Pick"}
+            {'// Pilihan Editor'}
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-[-0.03em] text-thrift-cream">
-            Featured Pieces
+            Koleksi Unggulan
           </h2>
         </div>
         <span className="text-[10px] font-mono text-thrift-text-muted hidden sm:block">
-          Scroll &rarr;
+          Geser &rarr;
         </span>
       </div>
 
-      <div ref={trackRef} className="flex gap-4 sm:gap-6 px-6 lg:px-10 w-max">
+      <div
+        ref={trackRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        className="flex gap-4 sm:gap-6 px-6 lg:px-10 overflow-x-auto no-scrollbar cursor-grab select-none"
+        style={{ scrollBehavior: dragging ? 'auto' : 'smooth' }}
+      >
         {featured.map((item) => (
           <div
             key={item.id}
@@ -104,11 +125,12 @@ export default function Showcase() {
               <img
                 src={item.image}
                 alt={item.name}
+                draggable={false}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute top-4 left-4 px-3 py-1.5 bg-thrift-accent text-[9px] font-mono uppercase tracking-wider text-white">
-                Featured
+                Unggulan
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent">

@@ -100,19 +100,19 @@ export default function Categories() {
     >
       <div className="max-w-[1400px] mx-auto">
         <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted/60 mb-6 block">
-          03 / Categories
+          03 / Kategori
         </span>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <div ref={headingRef} className="lg:col-span-4 flex flex-col justify-start lg:sticky lg:top-28 self-start">
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-[-0.04em] leading-[0.88] text-thrift-cream mb-6">
-              Browse <br />
-              By <br />
-              Style
+              Jelajahi <br />
+              Berdasarkan <br />
+              Gaya
             </h2>
             <div className="w-12 h-px bg-thrift-accent mb-6" />
             <p className="text-sm text-thrift-text-muted leading-relaxed max-w-xs">
-              Curated collections sorted by garment type. Find exactly what fits your wardrobe.
+              Koleksi terpilih yang disortir berdasarkan jenis pakaian. Temukan yang sesuai dengan gaya Anda.
             </p>
           </div>
 
@@ -135,7 +135,7 @@ export default function Categories() {
                   <div className="flex items-end justify-between">
                     <div>
                       <span className="text-[10px] font-mono text-thrift-accent uppercase tracking-[0.2em]">
-                        {cat.count} {cat.count === 1 ? 'item' : 'items'}
+                        {cat.count} {cat.count === 1 ? 'item' : 'item'}
                       </span>
                       <h3 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mt-1">
                         {cat.name}
