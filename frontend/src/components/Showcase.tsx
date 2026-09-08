@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
@@ -102,9 +103,12 @@ export default function Showcase() {
             Koleksi Unggulan
           </h2>
         </div>
-        <span className="text-[10px] font-mono text-thrift-text-muted hidden sm:block">
-          Geser &rarr;
-        </span>
+        <Link
+          href="/collection"
+          className="text-[10px] font-mono uppercase tracking-wider text-thrift-accent hover:underline hidden sm:block"
+        >
+          Lihat Semua &rarr;
+        </Link>
       </div>
 
       <div
@@ -117,9 +121,10 @@ export default function Showcase() {
         style={{ scrollBehavior: dragging ? 'auto' : 'smooth' }}
       >
         {featured.map((item) => (
-          <div
+          <Link
             key={item.id}
-            className="group relative w-[260px] sm:w-[380px] lg:w-[450px] shrink-0 cursor-pointer"
+            href={`/collection/${item.id}`}
+            className="group relative w-[260px] sm:w-[380px] lg:w-[450px] shrink-0"
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-thrift-border">
               <img
@@ -149,7 +154,7 @@ export default function Showcase() {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, Plus } from 'lucide-react';
@@ -43,7 +44,7 @@ function ProductSkeleton({ featured = false }: { featured?: boolean }) {
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
   return (
-    <article className="group relative flex flex-col cursor-pointer">
+    <Link href={`/collection/${product.id}`} className="group relative flex flex-col">
       <div className="relative overflow-hidden bg-thrift-border aspect-[4/5]">
         <img
           src={product.image}
@@ -83,13 +84,13 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       <span className="mt-3 block h-px w-full bg-thrift-border relative overflow-hidden">
         <span className="absolute inset-0 bg-thrift-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
       </span>
-    </article>
+    </Link>
   );
 }
 
 function FeaturedCard({ product }: { product: Product }) {
   return (
-    <article className="group relative flex flex-col cursor-pointer lg:row-span-2">
+    <Link href={`/collection/${product.id}`} className="group relative flex flex-col lg:row-span-2">
       <div className="relative overflow-hidden bg-thrift-border aspect-[4/5] lg:aspect-auto lg:h-full">
         <img
           src={product.image}
@@ -123,7 +124,7 @@ function FeaturedCard({ product }: { product: Product }) {
           </div>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -226,9 +227,12 @@ export default function FeaturedProducts() {
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-[-0.03em] text-thrift-cream">
               Temuan Terbaru
             </h2>
-            <p className="text-sm text-thrift-text-muted max-w-xs sm:text-right">
-              Filter arsip kami yang luas berdasarkan kategori.
-            </p>
+            <Link
+              href="/collection"
+              className="text-[10px] font-mono uppercase tracking-wider text-thrift-accent hover:underline shrink-0"
+            >
+              Lihat Semua &rarr;
+            </Link>
           </div>
         </div>
 

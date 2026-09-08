@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
@@ -52,11 +53,6 @@ export default function CTA() {
     return () => ctx.revert();
   }, []);
 
-  const handleShopNow = (e: React.MouseEvent) => {
-    e.preventDefault();
-    alert('Silakan login terlebih dahulu untuk melakukan pemesanan.');
-  };
-
   return (
     <section
       ref={sectionRef}
@@ -67,29 +63,28 @@ export default function CTA() {
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-accent mb-6 block">
             {'// Amankan Sekarang'}
           </span>
-          
+
           <h2 className="text-5xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.86] mb-8 text-thrift-cream">
             Temukan <br />
             Karakter <br />
             Barumu.
           </h2>
-          
+
           <div className="w-16 h-px bg-thrift-accent mb-8" />
-          
+
           <p className="text-sm text-thrift-text-muted max-w-md leading-relaxed">
             Rilis arsip terbaru setiap minggu. Setiap potongan pakaian hanya tersedia satu buah — jadilah yang pertama atau kehilangan kesempatan selamanya.
           </p>
         </div>
 
-        <a
+        <Link
           ref={btnRef}
-          href="#shop"
-          onClick={handleShopNow}
-          className="inline-flex items-center gap-3 px-10 py-5 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-thrift-accent-warm transition-all duration-500 group cursor-pointer"
+          href="/collection"
+          className="inline-flex items-center gap-3 px-10 py-5 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-thrift-accent-warm transition-all duration-500 group"
         >
           Eksplor Katalog
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-        </a>
+        </Link>
       </div>
     </section>
   );

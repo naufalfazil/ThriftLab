@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ArrowDownRight } from 'lucide-react';
 
@@ -47,11 +48,6 @@ export default function Hero({ ready = true }: HeroProps) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [ready]);
 
-  const handleShopNow = (e: React.MouseEvent) => {
-    e.preventDefault();
-    alert('Silakan login terlebih dahulu untuk melakukan pemesanan.');
-  };
-
   return (
     <section
       id="home"
@@ -77,30 +73,26 @@ export default function Hero({ ready = true }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-9 flex flex-col items-start">
             <div ref={badgeRef} className="inline-flex items-center gap-3 mb-10 opacity-0">
-              <span className="w-8 h-px bg-thrift-accent" />
-              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-text-muted">
-                Rilis 04 — Arsip Terpilih
-              </span>
             </div>
 
             <div className="overflow-hidden mb-1">
               <div ref={line1Ref} className="opacity-0">
                 <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-cream">
-                  Kenakan
+                  Jual
                 </h1>
               </div>
             </div>
             <div className="overflow-hidden mb-1">
               <div ref={line2Ref} className="opacity-0">
                 <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-cream">
-                  Gaya Tak
+                  Dan Beli
                 </h1>
               </div>
             </div>
             <div className="overflow-hidden mb-12">
               <div ref={line3Ref} className="opacity-0">
                 <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-accent">
-                  Terduga.
+                  Pakaian Bekas
                 </h1>
               </div>
             </div>
@@ -116,19 +108,19 @@ export default function Hero({ ready = true }: HeroProps) {
               </p>
 
               <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 opacity-0">
-                <button
-                  onClick={handleShopNow}
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 group cursor-pointer"
+                <Link
+                  href="/collection"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 group"
                 >
                   Jelajahi Koleksi
                   <ArrowDownRight className="w-4 h-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300" />
-                </button>
-                <a
-                  href="#about"
+                </Link>
+                <Link
+                  href="/about"
                   className="inline-flex items-center justify-center px-8 py-4 border border-thrift-border-light text-thrift-cream text-xs font-bold uppercase tracking-[0.15em] hover:border-thrift-cream transition-all duration-300"
                 >
-                  Filosofi Kami
-                </a>
+                  Tentang Kami
+                </Link>
               </div>
             </div>
           </div>

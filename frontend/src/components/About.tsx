@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -78,7 +78,7 @@ export default function About() {
     >
       <div className="max-w-[1400px] mx-auto">
         <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-accent mb-6 block">
-          {'// Filosofi Kami'}
+          {'// Tentang Kami'}
         </span>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-20">

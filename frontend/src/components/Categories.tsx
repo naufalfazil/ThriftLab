@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
@@ -19,6 +20,7 @@ interface Product {
 
 interface CategoryGroup {
   name: string;
+  slug: string;
   count: number;
   image: string;
 }
@@ -43,7 +45,12 @@ export default function Categories() {
           }
         });
         const groups: CategoryGroup[] = Array.from(groupMap.entries())
-          .map(([name, { count, image }]) => ({ name, count, image }))
+          .map(([name, { count, image }]) => ({
+            name,
+            slug: name.toLowerCase().replace(/\s+/g, '-'),
+            count,
+            image,
+          }))
           .sort((a, b) => b.count - a.count)
           .slice(0, 6);
         setCategories(groups);
@@ -103,9 +110,9 @@ export default function Categories() {
           03 / Kategori
         </span>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          <div ref={headingRef} className="lg:col-span-4 flex flex-col justify-start lg:sticky lg:top-28 self-start">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-[-0.04em] leading-[0.88] text-thrift-cream mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16">
+          <div ref={headingRef} className="lg:col-span-5 flex flex-col justify-start lg:sticky lg:top-28 self-start">
+            <h2 className="text-5xl sm:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold uppercase tracking-[-0.04em] leading-[0.88] text-thrift-cream mb-6 break-words">
               Jelajahi <br />
               Berdasarkan <br />
               Gaya
@@ -116,11 +123,11 @@ export default function Categories() {
             </p>
           </div>
 
-          <div ref={gridRef} className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+          <div ref={gridRef} className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             {categories.map((cat, idx) => (
-              <a
+              <Link
                 key={cat.name}
-                href="#shop"
+                href={`/categories/${cat.slug}`}
                 className={`group relative overflow-hidden bg-thrift-border border border-thrift-border hover:border-thrift-border-light transition-all duration-500 ${
                   idx === 0 ? 'sm:col-span-2 aspect-[16/7]' : 'aspect-[4/3]'
                 }`}
@@ -146,9 +153,18 @@ export default function Categories() {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
+        </div>
+
+        <div className="mt-12 text-center">
+          <Link
+            href="/categories"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-thrift-accent hover:underline"
+          >
+            Lihat Semua Kategori &rarr;
+          </Link>
         </div>
       </div>
     </section>
