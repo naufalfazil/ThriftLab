@@ -5,10 +5,10 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Shop', href: '#shop' },
-  { label: 'Categories', href: '#categories' },
-  { label: 'About', href: '#about' },
+  { label: 'Beranda', href: '#home' },
+  { label: 'Koleksi', href: '#shop' },
+  { label: 'Kategori', href: '#categories' },
+  { label: 'Tentang', href: '#about' },
 ];
 
 export default function Navbar() {
@@ -44,12 +44,17 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
+  const handleShopNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    alert('Silakan login terlebih dahulu untuk melakukan pemesanan.');
+  };
+
   return (
     <>
       <header
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#faf8f5]/95 backdrop-blur-md border-b border-thrift-border'
+            ? 'bg-[#f5f0e8]/95 backdrop-blur-md border-b border-thrift-border'
             : 'bg-transparent'
         }`}
       >
@@ -74,13 +79,13 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center">
-            <a
-              href="#shop"
-              className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 border border-thrift-border-light text-thrift-cream hover:bg-thrift-accent hover:text-white hover:border-thrift-accent transition-all duration-300"
+            <button
+              onClick={handleShopNow}
+              className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 border border-thrift-border-light text-thrift-cream hover:bg-thrift-accent hover:text-white hover:border-thrift-accent transition-all duration-300 cursor-pointer"
             >
-              Shop Now
+              Belanja Sekarang
               <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+            </button>
           </div>
 
           <button
@@ -95,7 +100,7 @@ export default function Navbar() {
 
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-30 bg-[#faf8f5] flex flex-col justify-center px-8 ${
+        className={`fixed inset-0 z-30 bg-[#f5f0e8] flex flex-col justify-center px-8 ${
           mobileOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
         style={{ opacity: mobileOpen ? 1 : 0 }}
@@ -112,13 +117,12 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="#shop"
-            onClick={() => setMobileOpen(false)}
-            className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-thrift-accent mt-4"
+          <button
+            onClick={(e) => { setMobileOpen(false); handleShopNow(e); }}
+            className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-thrift-accent mt-4 cursor-pointer text-left"
           >
-            Shop Now <ArrowUpRight className="w-4 h-4" />
-          </a>
+            Belanja Sekarang <ArrowUpRight className="w-4 h-4" />
+          </button>
         </nav>
       </div>
     </>

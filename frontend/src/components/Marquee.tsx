@@ -4,14 +4,14 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 const items = [
-  'Vintage Flannel',
-  'Rare Archives',
+  'Flannel Vintage',
+  'Arsip Langka',
   'Second-Hand',
   'Streetwear',
-  'Authentic',
-  'Curated',
-  'Sustainable',
-  'One-of-a-Kind',
+  'Otentik',
+  'Terpilih',
+  'Berkelanjutan',
+  'Satu-satunya',
 ];
 
 export default function Marquee() {

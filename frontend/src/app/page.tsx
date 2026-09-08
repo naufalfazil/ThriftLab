@@ -16,7 +16,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   return (
-    <main className="bg-[#faf8f5] min-h-screen text-thrift-text selection:bg-thrift-accent selection:text-white">
+    <main className="bg-[#f5f0e8] min-h-screen text-thrift-text selection:bg-thrift-accent selection:text-white">
       {loading && <PageLoader onComplete={() => setLoading(false)} />}
       <Navbar />
       <Hero ready={!loading} />

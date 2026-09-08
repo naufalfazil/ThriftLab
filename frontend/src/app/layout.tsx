@@ -15,9 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ThriftLab — Curated Vintage & Second-Hand Streetwear",
+  title: "ThriftLab — Streetwear Vintage & Second-Hand Terpilih",
   description:
-    "Handpicked vintage streetwear, rare archives, and authenticated second-hand pieces for the bold generation.",
+    "Streetwear vintage pilihan, arsip langka, dan potongan second-hand otentik untuk generasi berani.",
 };
 
 export default function RootLayout({

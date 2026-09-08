@@ -52,7 +52,7 @@ export default function PageLoader({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#faf8f5]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#f5f0e8]"
       style={{ clipPath: 'inset(0 0 0% 0)' }}
     >
       <div ref={textRef} className="overflow-hidden">
@@ -73,7 +73,7 @@ export default function PageLoader({ onComplete }: { onComplete: () => void }) {
       </div>
 
       <p className="mt-6 text-[10px] font-mono uppercase tracking-[0.3em] text-thrift-text-muted">
-        Curated Archives
+        Arsip Terpilih
       </p>
     </div>
   );

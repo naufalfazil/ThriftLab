@@ -47,6 +47,11 @@ export default function Hero({ ready = true }: HeroProps) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [ready]);
 
+  const handleShopNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    alert('Silakan login terlebih dahulu untuk melakukan pemesanan.');
+  };
+
   return (
     <section
       id="home"
@@ -74,28 +79,28 @@ export default function Hero({ ready = true }: HeroProps) {
             <div ref={badgeRef} className="inline-flex items-center gap-3 mb-10 opacity-0">
               <span className="w-8 h-px bg-thrift-accent" />
               <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-text-muted">
-                Drop 04 — Archive Release
+                Rilis 04 — Arsip Terpilih
               </span>
             </div>
 
             <div className="overflow-hidden mb-1">
               <div ref={line1Ref} className="opacity-0">
                 <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-cream">
-                  Wear The
+                  Kenakan
                 </h1>
               </div>
             </div>
             <div className="overflow-hidden mb-1">
               <div ref={line2Ref} className="opacity-0">
                 <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-cream">
-                  Unexpected
+                  Gaya Tak
                 </h1>
               </div>
             </div>
             <div className="overflow-hidden mb-12">
               <div ref={line3Ref} className="opacity-0">
                 <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-accent">
-                  Archive.
+                  Terduga.
                 </h1>
               </div>
             </div>
@@ -105,24 +110,24 @@ export default function Hero({ ready = true }: HeroProps) {
                 ref={descRef}
                 className="text-base sm:text-lg text-thrift-text-muted max-w-sm leading-relaxed font-light opacity-0"
               >
-                Handpicked vintage streetwear, rare archives, and authenticated
-                second-hand pieces designed for the bold generation. No replicas,
-                pure history.
+                Streetwear vintage pilihan, arsip langka, dan potongan second-hand
+                otentik yang dirancang untuk generasi berani. Tanpa replika,
+                murni sejarah.
               </p>
 
               <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 opacity-0">
-                <a
-                  href="#shop"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 group"
+                <button
+                  onClick={handleShopNow}
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 group cursor-pointer"
                 >
-                  Explore Collection
+                  Jelajahi Koleksi
                   <ArrowDownRight className="w-4 h-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300" />
-                </a>
+                </button>
                 <a
                   href="#about"
                   className="inline-flex items-center justify-center px-8 py-4 border border-thrift-border-light text-thrift-cream text-xs font-bold uppercase tracking-[0.15em] hover:border-thrift-cream transition-all duration-300"
                 >
-                  Our Philosophy
+                  Filosofi Kami
                 </a>
               </div>
             </div>
@@ -131,16 +136,16 @@ export default function Hero({ ready = true }: HeroProps) {
           <div ref={sideRef} className="lg:col-span-3 hidden lg:block opacity-0 mt-4">
             <div className="border-l border-thrift-border-light pl-8 py-4">
               <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-text-muted mb-3">
-                Verified Authenticity
+                Keaslian Terjamin
               </p>
               <p className="text-sm text-thrift-text-muted leading-relaxed">
-                Every garment goes through rigorous condition rating and quality
-                inspection before entering the ThriftLab archive.
+                Setiap pakaian melewati penilaian kondisi ketat dan inspeksi
+                kualitas sebelum memasuki arsip ThriftLab.
               </p>
               <div className="mt-8 flex items-center gap-3">
                 <span className="text-3xl font-bold text-thrift-accent font-mono">40+</span>
                 <span className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted">
-                  Curated<br />Pieces
+                  Koleksi<br />Pilihan
                 </span>
               </div>
             </div>
