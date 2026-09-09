@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
 
   const [name, setName] = useState('');
