@@ -1,9 +1,72 @@
 'use client';
 
+import { useState, FormEvent } from 'react';
 import Link from 'next/link';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { API_URL } from '@/lib/api';
 
 export default function ContactPage() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<'success' | 'error' | null>(null);
+  const [statusMsg, setStatusMsg] = useState('');
+
+  function validate(): boolean {
+    if (!name.trim()) return false;
+    if (!email.trim()) return false;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) return false;
+    if (!message.trim()) return false;
+    return true;
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setStatus(null);
+
+    if (!validate()) {
+      setStatus('error');
+      setStatusMsg('Lengkapi semua field yang wajib diisi dengan format yang benar.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          subject: subject.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Gagal mengirim pesan.');
+      }
+
+      setStatus('success');
+      setStatusMsg(data.message || 'Pesan terkirim, kami akan segera membalas.');
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+    } catch (err) {
+      setStatus('error');
+      setStatusMsg(err instanceof Error ? err.message : 'Terjadi kesalahan. Coba lagi nanti.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <section className="pt-28 pb-24 sm:pt-32 sm:pb-32 px-6 lg:px-10">
       <div className="max-w-[1400px] mx-auto">
@@ -68,32 +131,36 @@ export default function ContactPage() {
           </div>
 
           <div className="lg:col-span-6">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label
-                    htmlFor="name"
+                    htmlFor="page-name"
                     className="block text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-2"
                   >
-                    Nama
+                    Nama <span className="text-thrift-accent">*</span>
                   </label>
                   <input
                     type="text"
-                    id="name"
+                    id="page-name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                     placeholder="Nama Anda"
                   />
                 </div>
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="page-email"
                     className="block text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-2"
                   >
-                    Email
+                    Email <span className="text-thrift-accent">*</span>
                   </label>
                   <input
                     type="email"
-                    id="email"
+                    id="page-email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                     placeholder="email@anda.com"
                   />
@@ -101,37 +168,60 @@ export default function ContactPage() {
               </div>
               <div>
                 <label
-                  htmlFor="subject"
+                  htmlFor="page-subject"
                   className="block text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-2"
                 >
                   Subjek
                 </label>
                 <input
                   type="text"
-                  id="subject"
+                  id="page-subject"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
                   className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                   placeholder="Perihal pesan Anda"
                 />
               </div>
               <div>
                 <label
-                  htmlFor="message"
+                  htmlFor="page-message"
                   className="block text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-2"
                 >
-                  Pesan
+                  Pesan <span className="text-thrift-accent">*</span>
                 </label>
                 <textarea
-                  id="message"
+                  id="page-message"
                   rows={6}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors resize-none"
                   placeholder="Tulis pesan Anda di sini..."
                 />
               </div>
+
+              {status && (
+                <div
+                  className={`text-xs font-mono uppercase tracking-wider ${
+                    status === 'success' ? 'text-green-700' : 'text-red-600'
+                  }`}
+                >
+                  {statusMsg}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 cursor-pointer"
+                disabled={loading}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-pointer"
               >
-                Kirim Pesan
+                {loading ? (
+                  'Mengirim...'
+                ) : (
+                  <>
+                    Kirim Pesan
+                    <Send className="w-3.5 h-3.5" />
+                  </>
+                )}
               </button>
             </form>
           </div>
