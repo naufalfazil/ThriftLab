@@ -14,10 +14,11 @@ app.get('/', (_req: Request, res: Response) => {
 
 app.use('/api/products', productRoutes);
 
-// 404 handler for unknown API routes
-app.use('/api/*', (_req: Request, res: Response) => {
+app.use('/api/', (_req: Request, res: Response) => {
   res.status(404).json({ error: 'Endpoint not found' });
 });
+
+
 
 // Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: express.NextFunction) => {
