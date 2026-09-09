@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ShoppingBag } from 'lucide-react';
 import DesktopNav from './DesktopNav';
 import MobileNav from './MobileNav';
+import { useCart } from '@/lib/cart-context';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -34,7 +36,19 @@ export default function Navbar() {
 
           <DesktopNav />
 
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-3">
+            <Link
+              href="/cart"
+              className="relative p-3 text-thrift-cream hover:text-thrift-accent transition-colors"
+              aria-label="Keranjang"
+            >
+              <ShoppingBag className="w-[18px] h-[18px]" />
+              {totalItems > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-thrift-accent text-white text-[9px] font-mono font-bold flex items-center justify-center rounded-full">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
             <Link
               href="/auth/login"
               className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 border border-thrift-border-light text-thrift-cream hover:bg-thrift-accent hover:text-white hover:border-thrift-accent transition-all duration-300"

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { fetchProductById, type Product } from '@/lib/api';
 import { ArrowUpRight } from 'lucide-react';
+import { useCart } from '@/lib/cart-context';
 
 function ProductSkeleton() {
   return (
@@ -28,6 +29,7 @@ export default function ProductDetailPage() {
   const [related, setRelated] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const { addItem } = useCart();
 
   useEffect(() => {
     const productId = Number(id);
@@ -167,7 +169,9 @@ export default function ProductDetailPage() {
               </div>
             )}
 
-            <button className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 w-full sm:w-auto cursor-pointer">
+            <button 
+            onClick={() => addItem(product)}
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 w-full sm:w-auto cursor-pointer">
               Tambahkan ke Keranjang
               <ArrowUpRight className="w-4 h-4" />
             </button>
