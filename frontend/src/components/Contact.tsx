@@ -111,7 +111,7 @@ export default function Contact() {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.text();
 
       if (!res.ok) {
         throw new Error(data.error || 'Gagal mengirim pesan.');

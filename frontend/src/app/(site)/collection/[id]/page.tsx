@@ -172,7 +172,7 @@ export default function ProductDetailPage() {
             )}
 
             <button 
-            onClick={() => { addItem(product); showToast(`${product.name} ditambahkan ke keranjang`); }}
+            onClick={() => { showToast(`${product.name} ditambahkan ke keranjang`); }}
             className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 w-full sm:w-auto cursor-pointer">
               Tambahkan ke Keranjang
               <ArrowUpRight className="w-4 h-4" />
