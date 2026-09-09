@@ -9,6 +9,7 @@ import FeaturedProducts from '@/components/FeaturedProducts';
 import Categories from '@/components/Categories';
 import About from '@/components/About';
 import CTA from '@/components/CTA';
+import Contact from '@/components/Contact';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -23,6 +24,7 @@ export default function Home() {
       <Categories />
       <About />
       <CTA />
+      <Contact />
     </>
   );
 }
