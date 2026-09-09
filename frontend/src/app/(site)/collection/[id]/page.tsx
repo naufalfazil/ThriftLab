@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import { fetchProductById, type Product } from '@/lib/api';
 import { ArrowUpRight } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
+import { useToast } from '@/lib/toast-context';
 
 function ProductSkeleton() {
   return (
@@ -30,6 +31,7 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const { addItem } = useCart();
+  const { showToast } = useToast();
 
   useEffect(() => {
     const productId = Number(id);
@@ -170,7 +172,7 @@ export default function ProductDetailPage() {
             )}
 
             <button 
-            onClick={() => addItem(product)}
+            onClick={() => { addItem(product); showToast(`${product.name} ditambahkan ke keranjang`); }}
             className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 w-full sm:w-auto cursor-pointer">
               Tambahkan ke Keranjang
               <ArrowUpRight className="w-4 h-4" />
