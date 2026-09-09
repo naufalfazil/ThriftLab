@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/navbar/";
 import Footer from "@/components/Footer";
 
 const spaceGrotesk = Space_Grotesk({
