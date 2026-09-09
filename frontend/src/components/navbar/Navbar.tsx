@@ -36,10 +36,10 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center">
             <Link
-              href="/collection"
+              href="/auth/login"
               className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] px-6 py-3 border border-thrift-border-light text-thrift-cream hover:bg-thrift-accent hover:text-white hover:border-thrift-accent transition-all duration-300"
             >
-              Shop Now
+              Belanja Sekarang
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>

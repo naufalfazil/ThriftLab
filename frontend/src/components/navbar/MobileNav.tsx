@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { navItems, type NavItem } from '@/lib/nav-data';
 
@@ -138,11 +138,12 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
 
         <div className="mt-auto pt-12">
           <Link
-            href="/collection"
+            href="/auth/login"
             onClick={onClose}
             className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-thrift-accent"
           >
-            Shop Now
+            Belanja Sekarang
+            <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
