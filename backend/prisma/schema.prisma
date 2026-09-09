@@ -1,0 +1,581 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ImageUpload {
+  id                Int                 @id @default(autoincrement())
+  public_id         String              @db.VarChar(255)
+  secure_url        String
+  created_at        DateTime            @default(now()) @db.Timestamp(6)
+  commodities_table commodities_table[]
+}
+
+model admin_activity_log {
+  id          Int         @id @default(autoincrement())
+  adminId     Int
+  action      String      @db.VarChar(50)
+  entityType  String      @db.VarChar(50)
+  entityId    Int
+  reason      String?
+  metadata    Json?       @default("{}") @db.Json
+  createdAt   DateTime    @default(now()) @db.Timestamptz(6)
+  users_table users_table @relation(fields: [adminId], references: [id], onUpdate: NoAction, map: "admin_activity_log_adminId_users_table_id_fk")
+
+  @@index([adminId], map: "admin_activity_log_admin_idx")
+  @@index([createdAt], map: "admin_activity_log_created_idx")
+  @@index([entityType, entityId], map: "admin_activity_log_entity_idx")
+}
+
+model categories_table {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @unique(map: "categories_table_name_unique") @db.VarChar(100)
+  description        String?
+  icon               String?
+  createdAt          DateTime             @default(now()) @db.Timestamptz(6)
+  commodities_table  commodities_table[]
+  fee_settings_table fee_settings_table[]
+}
+
+model chat_messages_table {
+  id               Int               @id @default(autoincrement())
+  roomId           Int
+  senderId         Int
+  type             chat_message_type @default(text)
+  content          String
+  offerPrice       Decimal?          @db.Decimal(12, 2)
+  offerQuantity    Decimal?          @db.Decimal(12, 2)
+  isRead           Boolean           @default(false)
+  createdAt        DateTime          @default(now()) @db.Timestamptz(6)
+  isEdited         Boolean           @default(false)
+  isDeleted        Boolean           @default(false)
+  replyToId        Int?
+  chat_rooms_table chat_rooms_table  @relation(fields: [roomId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "chat_messages_table_roomId_chat_rooms_table_id_fk")
+  users_table      users_table       @relation(fields: [senderId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "chat_messages_table_senderId_users_table_id_fk")
+
+  @@index([roomId], map: "chat_messages_room_idx")
+  @@index([senderId], map: "chat_messages_sender_idx")
+}
+
+model chat_rooms_table {
+  id                                                 Int                        @id @default(autoincrement())
+  buyerId                                            Int
+  farmerId                                           Int
+  commodityId                                        Int
+  status                                             chat_room_status           @default(active)
+  lastMessage                                        String?
+  lastMessageAt                                      DateTime?                  @db.Timestamptz(6)
+  createdAt                                          DateTime                   @default(now()) @db.Timestamptz(6)
+  buyerPinned                                        Boolean                    @default(false)
+  farmerPinned                                       Boolean                    @default(false)
+  chat_messages_table                                chat_messages_table[]
+  users_table_chat_rooms_table_buyerIdTousers_table  users_table                @relation("chat_rooms_table_buyerIdTousers_table", fields: [buyerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "chat_rooms_table_buyerId_users_table_id_fk")
+  commodities_table                                  commodities_table          @relation(fields: [commodityId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "chat_rooms_table_commodityId_commodities_table_id_fk")
+  users_table_chat_rooms_table_farmerIdTousers_table users_table                @relation("chat_rooms_table_farmerIdTousers_table", fields: [farmerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "chat_rooms_table_farmerId_users_table_id_fk")
+  negotiation_offers_table                           negotiation_offers_table[]
+  notifications_table                                notifications_table[]
+
+  @@index([buyerId], map: "chat_rooms_buyer_idx")
+  @@index([commodityId], map: "chat_rooms_commodity_idx")
+  @@index([farmerId], map: "chat_rooms_farmer_idx")
+}
+
+model chatbot_kb_articles_table {
+  id                     Int                      @id @default(autoincrement())
+  title                  String                   @db.VarChar(200)
+  category               String                   @db.VarChar(50)
+  triggerKeywords        String?
+  answerContent          String
+  isActive               Boolean                  @default(true)
+  createdAt              DateTime                 @default(now()) @db.Timestamptz(6)
+  chatbot_messages_table chatbot_messages_table[]
+}
+
+model chatbot_messages_table {
+  id                        Int                        @id @default(autoincrement())
+  sessionId                 Int
+  sender                    String                     @db.VarChar(10)
+  content                   String
+  intentDetected            String?                    @db.VarChar(50)
+  kbArticleId               Int?
+  createdAt                 DateTime                   @default(now()) @db.Timestamptz(6)
+  chatbot_kb_articles_table chatbot_kb_articles_table? @relation(fields: [kbArticleId], references: [id], onUpdate: NoAction, map: "chatbot_messages_table_kbArticleId_chatbot_kb_articles_table_id")
+  chatbot_sessions_table    chatbot_sessions_table     @relation(fields: [sessionId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "chatbot_messages_table_sessionId_chatbot_sessions_table_id_fk")
+
+  @@index([sessionId], map: "chatbot_messages_session_idx")
+}
+
+model chatbot_sessions_table {
+  id                     Int                      @id @default(autoincrement())
+  userId                 Int?
+  guestSessionToken      String?                  @db.VarChar(255)
+  productId              Int?
+  status                 chatbot_session_status   @default(ACTIVE)
+  fallbackCount          Int                      @default(0)
+  createdAt              DateTime                 @default(now()) @db.Timestamptz(6)
+  chatbot_messages_table chatbot_messages_table[]
+  commodities_table      commodities_table?       @relation(fields: [productId], references: [id], onUpdate: NoAction, map: "chatbot_sessions_table_productId_commodities_table_id_fk")
+  users_table            users_table?             @relation(fields: [userId], references: [id], onUpdate: NoAction, map: "chatbot_sessions_table_userId_users_table_id_fk")
+
+  @@index([userId], map: "chatbot_sessions_user_idx")
+}
+
+model commodities_table {
+  id                                                    Int                        @id @default(autoincrement())
+  farmerId                                              Int
+  categoryId                                            Int
+  name                                                  String                     @db.VarChar(150)
+  description                                           String?
+  price                                                 Decimal                    @db.Decimal(12, 2)
+  minPrice                                              Decimal?                   @db.Decimal(12, 2)
+  maxPrice                                              Decimal?                   @db.Decimal(12, 2)
+  stock                                                 Decimal                    @db.Decimal(12, 2)
+  unit                                                  String                     @default("kg") @db.VarChar(30)
+  quality                                               String                     @default("A") @db.VarChar(50)
+  location                                              String                     @db.VarChar(150)
+  harvestEstimate                                       DateTime?                  @db.Timestamptz(6)
+  image                                                 Int?
+  status                                                commodity_status           @default(pending)
+  rating                                                Decimal                    @default(0) @db.Decimal(3, 2)
+  reviewCount                                           Int                        @default(0)
+  createdAt                                             DateTime                   @default(now()) @db.Timestamptz(6)
+  images                                                Json?                      @default("[]") @db.Json
+  video_url                                             String?
+  isPublished                                           Boolean                    @default(false)
+  minWeightForNego                                      Decimal?                   @db.Decimal(12, 2)
+  fixedPrice                                            Decimal?                   @db.Decimal(12, 2)
+  rejectedReason                                        String?
+  reviewedAt                                            DateTime?                  @db.Timestamptz(6)
+  reviewedBy                                            Int?
+  chat_rooms_table                                      chat_rooms_table[]
+  chatbot_sessions_table                                chatbot_sessions_table[]
+  categories_table                                      categories_table           @relation(fields: [categoryId], references: [id], onUpdate: NoAction, map: "commodities_table_categoryId_categories_table_id_fk")
+  users_table_commodities_table_farmerIdTousers_table   users_table                @relation("commodities_table_farmerIdTousers_table", fields: [farmerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "commodities_table_farmerId_users_table_id_fk")
+  ImageUpload                                           ImageUpload?               @relation(fields: [image], references: [id], onUpdate: NoAction, map: "commodities_table_image_ImageUpload_id_fk")
+  users_table_commodities_table_reviewedByTousers_table users_table?               @relation("commodities_table_reviewedByTousers_table", fields: [reviewedBy], references: [id], onUpdate: NoAction, map: "commodities_table_reviewedBy_users_table_id_fk")
+  farmer_notes_table                                    farmer_notes_table[]
+  invoice                                               invoice[]
+  negotiation_offers_table                              negotiation_offers_table[]
+  orders_comodity                                       orders_comodity[]
+  orders_table                                          orders_table[]
+  reviews_table                                         reviews_table[]
+  wishlist_items_table                                  wishlist_items_table[]
+
+  @@index([categoryId], map: "commodities_category_idx")
+  @@index([farmerId], map: "commodities_farmer_idx")
+  @@index([status], map: "commodities_status_idx")
+}
+
+model contact_messages {
+  id        Int                    @id @default(autoincrement())
+  name      String                 @db.VarChar(150)
+  email     String                 @db.VarChar(150)
+  whatsapp  String?                @db.VarChar(30)
+  subject   String                 @db.VarChar(50)
+  message   String
+  status    contact_message_status @default(unread)
+  createdAt DateTime               @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime               @default(now()) @db.Timestamptz(6)
+
+  @@index([status])
+}
+
+model farmer_notes_table {
+  id                Int                @id @default(autoincrement())
+  farmerId          Int
+  commodityId       Int?
+  title             String?            @db.VarChar(200)
+  content           String
+  category          String             @default("lainnya") @db.VarChar(50)
+  noteDate          DateTime           @default(now()) @db.Timestamptz(6)
+  location          String?            @db.VarChar(200)
+  weather           String?            @db.VarChar(100)
+  tags              String?
+  createdAt         DateTime           @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime           @default(now()) @db.Timestamptz(6)
+  commodities_table commodities_table? @relation(fields: [commodityId], references: [id], onUpdate: NoAction, map: "farmer_notes_table_commodityId_commodities_table_id_fk")
+  users_table       users_table        @relation(fields: [farmerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "farmer_notes_table_farmerId_users_table_id_fk")
+
+  @@index([category], map: "farmer_notes_category_idx")
+  @@index([commodityId], map: "farmer_notes_commodity_idx")
+  @@index([noteDate], map: "farmer_notes_date_idx")
+  @@index([farmerId], map: "farmer_notes_farmer_idx")
+}
+
+model farmer_profile_images_table {
+  id          Int         @id @default(autoincrement())
+  farmerId    Int
+  public_id   String      @db.VarChar(255)
+  secure_url  String
+  caption     String?     @db.VarChar(150)
+  sortOrder   Int         @default(0)
+  created_at  DateTime    @default(now()) @db.Timestamptz(6)
+  users_table users_table @relation(fields: [farmerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "farmer_profile_images_table_farmerId_users_table_id_fk")
+
+  @@index([farmerId], map: "farmer_profile_images_farmer_idx")
+}
+
+model fee_settings_table {
+  id               Int               @id @default(autoincrement())
+  name             String            @db.VarChar(100)
+  categoryId       Int?
+  percentage       Decimal           @default(2.5) @db.Decimal(5, 2)
+  active           Boolean           @default(true)
+  updatedAt        DateTime          @default(now()) @db.Timestamptz(6)
+  categories_table categories_table? @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fee_settings_table_categoryId_categories_table_id_fk")
+}
+
+model invoice {
+  id                Int                @id @default(autoincrement())
+  productId         Int?
+  commodities_table commodities_table? @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "invoice_productId_commodities_table_id_fk")
+}
+
+model negotiation_offers_table {
+  id                                                         Int                   @id @default(autoincrement())
+  roomId                                                     Int
+  commodityId                                                Int
+  buyerId                                                    Int
+  farmerId                                                   Int
+  price                                                      Decimal               @db.Decimal(12, 2)
+  quantity                                                   Decimal               @db.Decimal(12, 2)
+  unit                                                       String                @default("kg") @db.VarChar(30)
+  status                                                     negotiation_status    @default(pending)
+  acceptedAt                                                 DateTime?             @db.Timestamptz(6)
+  createdAt                                                  DateTime              @default(now()) @db.Timestamptz(6)
+  buyerAccepted                                              Boolean               @default(false)
+  farmerAccepted                                             Boolean               @default(false)
+  users_table_negotiation_offers_table_buyerIdTousers_table  users_table           @relation("negotiation_offers_table_buyerIdTousers_table", fields: [buyerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "negotiation_offers_table_buyerId_users_table_id_fk")
+  commodities_table                                          commodities_table     @relation(fields: [commodityId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "negotiation_offers_table_commodityId_commodities_table_id_fk")
+  users_table_negotiation_offers_table_farmerIdTousers_table users_table           @relation("negotiation_offers_table_farmerIdTousers_table", fields: [farmerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "negotiation_offers_table_farmerId_users_table_id_fk")
+  chat_rooms_table                                           chat_rooms_table      @relation(fields: [roomId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "negotiation_offers_table_roomId_chat_rooms_table_id_fk")
+  notifications_table                                        notifications_table[]
+  orders_table                                               orders_table[]
+
+  @@index([buyerId], map: "negotiation_buyer_idx")
+  @@index([farmerId], map: "negotiation_farmer_idx")
+  @@index([roomId], map: "negotiation_room_idx")
+}
+
+model notifications_table {
+  id                       Int                       @id @default(autoincrement())
+  userId                   Int
+  title                    String                    @db.VarChar(150)
+  message                  String                    @db.VarChar
+  type                     String                    @default("info") @db.VarChar(30)
+  isRead                   Boolean                   @default(false)
+  createdAt                DateTime                  @default(now()) @db.Timestamptz(6)
+  relatedRoomId            Int?
+  relatedOfferId           Int?
+  negotiation_offers_table negotiation_offers_table? @relation(fields: [relatedOfferId], references: [id], onUpdate: NoAction, map: "notifications_table_relatedOfferId_negotiation_offers_table_id_")
+  chat_rooms_table         chat_rooms_table?         @relation(fields: [relatedRoomId], references: [id], onUpdate: NoAction, map: "notifications_table_relatedRoomId_chat_rooms_table_id_fk")
+  users_table              users_table               @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notifications_table_userId_users_table_id_fk")
+
+  @@index([userId], map: "notifications_user_idx")
+}
+
+model orderUser_table {
+  id              Int               @id @default(autoincrement())
+  userId          Int
+  created_at      DateTime          @default(now()) @db.Timestamp(6)
+  users_table     users_table       @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "orderUser_table_userId_users_table_id_fk")
+  orders_comodity orders_comodity[]
+}
+
+model orders_comodity {
+  id                Int               @id @default(autoincrement())
+  order_userId      Int
+  commodity_id      Int
+  quantity          Int
+  negotiated_price  Decimal?          @db.Decimal(15, 2)
+  created_at        DateTime          @default(now()) @db.Timestamp(6)
+  status            isPaying          @default(unpayed)
+  commodities_table commodities_table @relation(fields: [commodity_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "orders_comodity_commodity_id_commodities_table_id_fk")
+  orderUser_table   orderUser_table   @relation(fields: [order_userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "orders_comodity_order_userId_orderUser_table_id_fk")
+}
+
+model orders_table {
+  id                                             Int                       @id @default(autoincrement())
+  orderCode                                      String                    @unique(map: "orders_table_orderCode_unique") @db.VarChar(30)
+  buyerId                                        Int
+  farmerId                                       Int
+  commodityId                                    Int
+  quantity                                       Decimal                   @db.Decimal(12, 2)
+  unitPrice                                      Decimal                   @db.Decimal(12, 2)
+  subtotal                                       Decimal                   @db.Decimal(14, 2)
+  serviceFee                                     Decimal                   @default(0) @db.Decimal(14, 2)
+  deliveryFee                                    Decimal                   @default(0) @db.Decimal(14, 2)
+  totalPrice                                     Decimal                   @db.Decimal(14, 2)
+  deliveryMethod                                 delivery_method           @default(pickup)
+  deliveryAddress                                String?
+  status                                         order_status              @default(pending)
+  notes                                          String?
+  createdAt                                      DateTime                  @default(now()) @db.Timestamptz(6)
+  updatedAt                                      DateTime                  @default(now()) @db.Timestamptz(6)
+  negotiationId                                  Int?
+  recipientName                                  String?                   @db.VarChar(100)
+  recipientPhone                                 String?                   @db.VarChar(20)
+  addressStreet                                  String?
+  addressProvince                                String?                   @db.VarChar(100)
+  addressCity                                    String?                   @db.VarChar(100)
+  addressDistrict                                String?                   @db.VarChar(100)
+  addressPostalCode                              String?                   @db.VarChar(10)
+  addressNotes                                   String?
+  users_table_orders_table_buyerIdTousers_table  users_table               @relation("orders_table_buyerIdTousers_table", fields: [buyerId], references: [id], onUpdate: NoAction, map: "orders_table_buyerId_users_table_id_fk")
+  commodities_table                              commodities_table         @relation(fields: [commodityId], references: [id], onUpdate: NoAction, map: "orders_table_commodityId_commodities_table_id_fk")
+  users_table_orders_table_farmerIdTousers_table users_table               @relation("orders_table_farmerIdTousers_table", fields: [farmerId], references: [id], onUpdate: NoAction, map: "orders_table_farmerId_users_table_id_fk")
+  negotiation_offers_table                       negotiation_offers_table? @relation(fields: [negotiationId], references: [id], onUpdate: NoAction, map: "orders_table_negotiationId_negotiation_offers_table_id_fk")
+  payments_table                                 payments_table[]
+  reviews_table                                  reviews_table[]
+
+  @@index([buyerId], map: "orders_buyer_idx")
+  @@index([farmerId], map: "orders_farmer_idx")
+  @@index([status], map: "orders_status_idx")
+}
+
+model payments_table {
+  id            Int            @id @default(autoincrement())
+  orderId       Int
+  buyerId       Int
+  method        payment_method @default(bank_transfer)
+  amount        Decimal        @db.Decimal(14, 2)
+  fee           Decimal        @default(0) @db.Decimal(14, 2)
+  status        payment_status @default(pending)
+  referenceCode String?        @db.VarChar(50)
+  paidAt        DateTime?      @db.Timestamptz(6)
+  createdAt     DateTime       @default(now()) @db.Timestamptz(6)
+  users_table   users_table    @relation(fields: [buyerId], references: [id], onUpdate: NoAction, map: "payments_table_buyerId_users_table_id_fk")
+  orders_table  orders_table   @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "payments_table_orderId_orders_table_id_fk")
+
+  @@index([orderId], map: "payments_order_idx")
+}
+
+model reviews_table {
+  id                                              Int               @id @default(autoincrement())
+  orderId                                         Int
+  buyerId                                         Int
+  farmerId                                        Int
+  commodityId                                     Int
+  rating                                          Int
+  comment                                         String?
+  createdAt                                       DateTime          @default(now()) @db.Timestamptz(6)
+  users_table_reviews_table_buyerIdTousers_table  users_table       @relation("reviews_table_buyerIdTousers_table", fields: [buyerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "reviews_table_buyerId_users_table_id_fk")
+  commodities_table                               commodities_table @relation(fields: [commodityId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "reviews_table_commodityId_commodities_table_id_fk")
+  users_table_reviews_table_farmerIdTousers_table users_table       @relation("reviews_table_farmerIdTousers_table", fields: [farmerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "reviews_table_farmerId_users_table_id_fk")
+  orders_table                                    orders_table      @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "reviews_table_orderId_orders_table_id_fk")
+
+  @@index([commodityId], map: "reviews_commodity_idx")
+  @@index([farmerId], map: "reviews_farmer_idx")
+}
+
+model sales_targets_table {
+  id           Int                 @id @default(autoincrement())
+  farmerId     Int
+  targetAmount Decimal             @db.Decimal(14, 2)
+  startDate    DateTime            @db.Timestamptz(6)
+  endDate      DateTime            @db.Timestamptz(6)
+  status       sales_target_status @default(active)
+  createdAt    DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime            @default(now()) @db.Timestamptz(6)
+  users_table  users_table         @relation(fields: [farmerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "sales_targets_table_farmerId_users_table_id_fk")
+
+  @@index([farmerId], map: "sales_targets_farmer_idx")
+}
+
+model users_table {
+  id                                                                      Int                           @id @default(autoincrement())
+  username                                                                String                        @db.VarChar(100)
+  fullName                                                                String                        @db.VarChar(100)
+  noTelp                                                                  String                        @db.VarChar(20)
+  password                                                                String                        @db.VarChar(255)
+  email                                                                   String                        @unique(map: "users_table_email_unique") @db.VarChar(100)
+  role                                                                    user_role                     @default(pembeli)
+  businessType                                                            business_type                 @default(EMPTY_ENUM_VALUE)
+  preferredCommodity                                                      String?                       @db.VarChar(150)
+  demandScale                                                             demand_scale                  @default(EMPTY_ENUM_VALUE)
+  fotoProfile                                                             String?
+  address                                                                 String?
+  status                                                                  user_status                   @default(pending)
+  createdAt                                                               DateTime                      @default(now()) @db.Timestamptz(6)
+  bio                                                                     String?
+  farmingExperience                                                       String?                       @db.VarChar(50)
+  farmArea                                                                String?                       @db.VarChar(50)
+  farmingMethod                                                           String?                       @db.VarChar(100)
+  village                                                                 String?                       @db.VarChar(100)
+  rejectedReason                                                          String?
+  reviewedAt                                                              DateTime?                     @db.Timestamptz(6)
+  reviewedBy                                                              Int?
+  admin_activity_log                                                      admin_activity_log[]
+  chat_messages_table                                                     chat_messages_table[]
+  chat_rooms_table_chat_rooms_table_buyerIdTousers_table                  chat_rooms_table[]            @relation("chat_rooms_table_buyerIdTousers_table")
+  chat_rooms_table_chat_rooms_table_farmerIdTousers_table                 chat_rooms_table[]            @relation("chat_rooms_table_farmerIdTousers_table")
+  chatbot_sessions_table                                                  chatbot_sessions_table[]
+  commodities_table_commodities_table_farmerIdTousers_table               commodities_table[]           @relation("commodities_table_farmerIdTousers_table")
+  commodities_table_commodities_table_reviewedByTousers_table             commodities_table[]           @relation("commodities_table_reviewedByTousers_table")
+  farmer_notes_table                                                      farmer_notes_table[]
+  farmer_profile_images_table                                             farmer_profile_images_table[]
+  negotiation_offers_table_negotiation_offers_table_buyerIdTousers_table  negotiation_offers_table[]    @relation("negotiation_offers_table_buyerIdTousers_table")
+  negotiation_offers_table_negotiation_offers_table_farmerIdTousers_table negotiation_offers_table[]    @relation("negotiation_offers_table_farmerIdTousers_table")
+  notifications_table                                                     notifications_table[]
+  orderUser_table                                                         orderUser_table[]
+  orders_table_orders_table_buyerIdTousers_table                          orders_table[]                @relation("orders_table_buyerIdTousers_table")
+  orders_table_orders_table_farmerIdTousers_table                         orders_table[]                @relation("orders_table_farmerIdTousers_table")
+  payments_table                                                          payments_table[]
+  reviews_table_reviews_table_buyerIdTousers_table                        reviews_table[]               @relation("reviews_table_buyerIdTousers_table")
+  reviews_table_reviews_table_farmerIdTousers_table                       reviews_table[]               @relation("reviews_table_farmerIdTousers_table")
+  sales_targets_table                                                     sales_targets_table[]
+  users_table                                                             users_table?                  @relation("users_tableTousers_table", fields: [reviewedBy], references: [id], onUpdate: NoAction, map: "users_table_reviewedBy_users_table_id_fk")
+  other_users_table                                                       users_table[]                 @relation("users_tableTousers_table")
+  verification_code                                                       verification_code[]
+  wishlist_items_table                                                    wishlist_items_table[]
+
+  @@index([role], map: "users_role_idx")
+}
+
+model verification_code {
+  userId      Int
+  token       String      @db.VarChar(6)
+  expiredDate DateTime    @default(now()) @db.Timestamp(6)
+  id          Int         @id @default(autoincrement())
+  users_table users_table @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "verification_code_userId_users_table_id_fk")
+}
+
+model wishlist_items_table {
+  id                Int                       @id @default(autoincrement())
+  userId            Int
+  commodityId       Int
+  createdAt         DateTime                  @default(now()) @db.Timestamptz(6)
+  transactionType   wishlist_transaction_type @default(fixed_price)
+  weight            Decimal?                  @db.Decimal(12, 2)
+  price             Decimal?                  @db.Decimal(12, 2)
+  commodities_table commodities_table         @relation(fields: [commodityId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "wishlist_items_table_commodityId_commodities_table_id_fk")
+  users_table       users_table               @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "wishlist_items_table_userId_users_table_id_fk")
+
+  @@unique([userId, commodityId], map: "wishlist_items_user_commodity_key")
+  @@index([commodityId], map: "wishlist_items_commodity_idx")
+  @@index([userId], map: "wishlist_items_user_idx")
+}
+
+enum business_type {
+  distributor
+  umkm
+  restoran
+  koperasi
+  EMPTY_ENUM_VALUE @map("")
+}
+
+enum chat_message_type {
+  text
+  offer
+  counter_offer
+  accept
+  reject
+  system
+}
+
+enum chat_room_status {
+  active
+  closed
+}
+
+enum chatbot_session_status {
+  ACTIVE
+  ESCALATED
+  CLOSED
+}
+
+enum commodity_status {
+  pending
+  verified
+  rejected
+  available
+  sold_out
+}
+
+enum contact_message_status {
+  unread
+  read
+}
+
+enum delivery_method {
+  pickup
+  expedition
+}
+
+enum demand_scale {
+  SKALA_KECIL
+  SKALA_MENENGAH
+  SKALA_BESAR
+  EMPTY_ENUM_VALUE @map("")
+}
+
+enum isPaying {
+  payed
+  unpayed
+}
+
+enum negotiation_status {
+  pending
+  counter_offer
+  accepted
+  rejected
+  expired
+  cancelled
+}
+
+enum order_commodity_payment_status {
+  payed
+  unpayed
+}
+
+enum order_status {
+  pending
+  confirmed
+  processing
+  shipped
+  completed
+  cancelled
+}
+
+enum payment_method {
+  bank_transfer
+  virtual_account
+  ewallet
+  qris
+  cod
+}
+
+enum payment_status {
+  pending
+  paid
+  failed
+  refunded
+}
+
+enum sales_target_status {
+  active
+  completed
+  cancelled
+}
+
+enum user_role {
+  admin
+  petani
+  pembeli
+}
+
+enum user_status {
+  pending
+  verified
+  rejected
+  suspended
+}
+
+enum wishlist_transaction_type {
+  nego
+  fixed_price
+}

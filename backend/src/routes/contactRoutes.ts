@@ -1,19 +1,10 @@
 import { Router, Request, Response } from 'express';
+import { PrismaClient } from '@prisma/client';
 
 const router = Router();
+const prisma = new PrismaClient();
 
-interface ContactMessage {
-  id: number;
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-  createdAt: string;
-}
-
-const messages: ContactMessage[] = [];
-
-router.post('/', (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
   const { name, email, subject, message } = req.body;
 
   if (!name || !email || !message) {
@@ -27,22 +18,25 @@ router.post('/', (req: Request, res: Response) => {
     return;
   }
 
-  const newMessage: ContactMessage = {
-    id: messages.length + 1,
-    name: String(name).trim(),
-    email: String(email).trim(),
-    subject: subject ? String(subject).trim() : '',
-    message: String(message).trim(),
-    createdAt: new Date().toISOString(),
-  };
+  try {
+    const newMessage = await prisma.contact_messages.create({
+      data: {
+        name: String(name).trim(),
+        email: String(email).trim(),
+        subject: subject ? String(subject).trim() : '',
+        message: String(message).trim(),
+      },
+    });
 
-  messages.push(newMessage);
-
-  res.status(201).json({
-    success: true,
-    message: 'Pesan berhasil dikirim. Kami akan segera membalas.',
-    data: { id: newMessage.id },
-  });
+    res.status(201).json({
+      success: true,
+      message: 'Pesan berhasil dikirim. Kami akan segera membalas.',
+      data: { id: newMessage.id },
+    });
+  } catch (err) {
+    console.error('Contact error:', err);
+    res.status(500).json({ error: 'Gagal menyimpan pesan. Coba lagi nanti.' });
+  }
 });
 
 export default router;
