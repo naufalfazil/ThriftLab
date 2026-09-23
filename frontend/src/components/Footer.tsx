@@ -11,7 +11,6 @@ const footerLinks = {
   ],
   about: [
     { label: 'Our Story', href: '/about/story' },
-    { label: 'Sustainability', href: '/about/sustainability' },
     { label: 'Philosophy', href: '/about' },
   ],
   journal: [
@@ -114,23 +113,6 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-12 md:-mt-4">
-            <h4 className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-text-muted mb-5">
-              Tetap Terupdate
-            </h4>
-            <p className="text-sm text-thrift-text-muted mb-4">
-              Dapatkan notifikasi jadwal rilis mingguan kami.
-            </p>
-            <div className="flex max-w-md">
-              <input
-                type="email"
-                placeholder="Masukkan email Anda"
-                className="bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors w-full"
-              />
-              <button className="bg-thrift-accent px-5 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-thrift-accent-warm transition-colors flex items-center gap-1 cursor-pointer">
-                Gabung
-                <ArrowUpRight className="w-3 h-3" />
-              </button>
-            </div>
           </div>
         </div>
 

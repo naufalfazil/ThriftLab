@@ -67,15 +67,6 @@ export default function StoryPage() {
               <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Otentik</p>
             </div>
           </div>
-
-          <div className="mt-16">
-            <Link
-              href="/about/sustainability"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-thrift-accent hover:underline"
-            >
-              Baca tentang Sustainability kami &rarr;
-            </Link>
-          </div>
         </div>
       </div>
     </section>

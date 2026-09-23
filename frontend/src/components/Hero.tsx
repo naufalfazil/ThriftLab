@@ -70,9 +70,9 @@ export default function Hero({ ready = true }: HeroProps) {
           <div className="lg:col-span-9 flex flex-col items-start">
             <div ref={badgeRef} className="inline-flex items-center gap-3 mb-10 opacity-0">
               <span className="w-8 h-px bg-thrift-accent" />
-              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-text-muted">
+              {/* <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-text-muted">
                 Est. 2024 — Thrift Fashion
-              </span>
+              </span> */}
             </div>
 
             <div className="overflow-hidden mb-1">

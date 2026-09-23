@@ -98,7 +98,7 @@ export default function AboutPage() {
           <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-accent mb-4">
             {'// Pelajari Lebih Lanjut'}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6">
             <Link
               href="/about/story"
               className="group border border-thrift-border p-8 hover:border-thrift-border-light transition-all duration-500 flex flex-col justify-between min-h-[200px]"
@@ -108,18 +108,6 @@ export default function AboutPage() {
               </h3>
               <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-thrift-accent mt-4 group-hover:gap-3 transition-all duration-300">
                 Baca Cerita Kami
-                <ArrowUpRight className="w-4 h-4" />
-              </div>
-            </Link>
-            <Link
-              href="/about/sustainability"
-              className="group border border-thrift-border p-8 hover:border-thrift-border-light transition-all duration-500 flex flex-col justify-between min-h-[200px]"
-            >
-              <h3 className="text-2xl font-bold uppercase tracking-tight text-thrift-cream">
-                Sustainability
-              </h3>
-              <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-thrift-accent mt-4 group-hover:gap-3 transition-all duration-300">
-                Filosofi Kami
                 <ArrowUpRight className="w-4 h-4" />
               </div>
             </Link>
