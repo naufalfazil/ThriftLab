@@ -4,7 +4,8 @@ import { useState, useEffect, useRef, FormEvent } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, Mail } from 'lucide-react';
-import { API_URL } from '@/lib/api';
+
+const FORMSPREE_URL = 'https://formspree.io/f/xdekgqjy';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -100,7 +101,7 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/api/contact`, {
+      const res = await fetch(FORMSPREE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,77 +1,99 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 export default function PageLoader({ onComplete }: { onComplete: () => void }) {
   const loaderRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
     if (prefersReduced) {
-      onComplete();
+      onCompleteRef.current();
       return;
     }
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        if (loaderRef.current) loaderRef.current.style.display = 'none';
-        onComplete();
-      },
-    });
+    document.body.style.overflow = 'hidden';
 
-    const counter = { val: 0 };
-    tl.to(counter, {
-      val: 100,
-      duration: 1.2,
-      ease: 'power2.inOut',
-      onUpdate: () => {
-        setProgress(Math.floor(counter.val));
-      },
-    })
-      .to(textRef.current, {
-        yPercent: -100,
-        duration: 0.6,
-        ease: 'power3.in',
-      }, '+=0.1')
-      .to(progressRef.current, {
-        scaleX: 1,
-        duration: 0.8,
-        ease: 'power4.inOut',
-      }, '-=0.6')
-      .to(loaderRef.current, {
-        clipPath: 'inset(0 0 100% 0)',
-        duration: 0.9,
-        ease: 'power4.inOut',
-      }, '-=0.3');
-  }, [onComplete]);
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          if (loaderRef.current) {
+            loaderRef.current.style.display = 'none';
+          }
+          document.body.style.overflow = '';
+          onCompleteRef.current();
+        },
+      });
+
+      tl.fromTo(
+        textRef.current,
+        {
+          opacity: 0,
+          y: 40,
+          scale: 0.96,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          ease: 'power3.out',
+        }
+      )
+        .to({}, { duration: 1.1 })
+        .to(contentRef.current, {
+          y: -35,
+          opacity: 0,
+          scale: 0.96,
+          duration: 0.55,
+          ease: 'power3.in',
+        })
+        .to(
+          loaderRef.current,
+          {
+            clipPath: 'circle(0% at 50% 50%)',
+            duration: 1,
+            ease: 'power4.inOut',
+          },
+          '-=0.1'
+        );
+    }, loaderRef); 
+
+    return () => {
+      document.body.style.overflow = '';
+      ctx.revert(); 
+    };
+  }, []);
 
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-thrift-surface"
-      style={{ clipPath: 'inset(0 0 0% 0)' }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{
+        background:
+          'radial-gradient(circle at 50% 45%, #ffffff 0%, #f5f5f3 45%, #e8e8e4 100%)',
+        clipPath: 'circle(100% at 50% 50%)',
+      }}
     >
-      <div ref={textRef} className="overflow-hidden">
-        <h1 className="text-5xl sm:text-7xl font-bold tracking-[-0.04em] uppercase text-thrift-cream">
-          Thrift<span className="text-thrift-accent">Lab</span>
-        </h1>
-      </div>
-
-      <div className="mt-8 flex items-center gap-4">
-        <div className="w-40 h-[1px] bg-thrift-border relative overflow-hidden">
-          <div
-            ref={progressRef}
-            className="absolute inset-0 bg-thrift-accent origin-left"
-            style={{ transform: 'scaleX(0)' }}
-          />
+      <div ref={contentRef}>
+        <div ref={textRef} className="overflow-hidden text-center">
+          {/* PERUBAHAN DI SINI: text-thrift-surface diubah menjadi text-black */}
+          <h1 className="text-5xl font-bold tracking-[-0.06em] text-black sm:text-7xl">
+            Thrift<span className="text-thrift-accent">Lab</span>
+          </h1>
         </div>
-        <span className="text-xs font-mono text-thrift-text-muted tabular-nums w-8">{progress}</span>
       </div>
-
     </div>
   );
 }

@@ -22,7 +22,6 @@ app.use('/api/', (_req: Request, res: Response) => {
 
 
 
-// Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: express.NextFunction) => {
   console.error('Server error:', err.message);
   res.status(500).json({ error: 'Internal server error' });

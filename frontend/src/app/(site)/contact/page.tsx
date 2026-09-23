@@ -3,7 +3,8 @@
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
-import { API_URL } from '@/lib/api';
+
+const FORMSPREE_URL = 'https://formspree.io/f/xdekgqjy';
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -36,7 +37,7 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/api/contact`, {
+      const res = await fetch(FORMSPREE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
