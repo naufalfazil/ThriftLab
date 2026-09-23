@@ -5,7 +5,7 @@ import "./globals.css";
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ThriftLab — Platfrom Digital Jual Beli Barang Bekas",
+  title: "Thriftly — Platform Digital Jual Beli Barang Bekas",
   description:
     "Streetwear vintage pilihan, arsip langka, dan potongan second-hand otentik untuk generasi berani.",
 };
@@ -27,10 +27,10 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="id"
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#f5f0e8] text-thrift-text selection:bg-thrift-accent selection:text-white">
+      <body className="min-h-full flex flex-col">
         {children}
       </body>
     </html>

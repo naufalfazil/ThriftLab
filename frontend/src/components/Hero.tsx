@@ -30,17 +30,17 @@ export default function Hero({ ready = true }: HeroProps) {
 
     tl.fromTo(lineRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: 'power4.inOut' }, 0)
       .fromTo(badgeRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.3)
-      .fromTo(line1Ref.current, { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, 0.4)
-      .fromTo(line2Ref.current, { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, 0.55)
-      .fromTo(line3Ref.current, { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, 0.7)
-      .fromTo(descRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, 1)
-      .fromTo(ctaRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 1.1)
-      .fromTo(sideRef.current, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7 }, 0.9);
+      .fromTo(line1Ref.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, 0.4)
+      .fromTo(line2Ref.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, 0.55)
+      .fromTo(line3Ref.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, 0.7)
+      .fromTo(descRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.95)
+      .fromTo(ctaRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 1.05)
+      .fromTo(sideRef.current, { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 }, 0.85);
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!glowRef.current) return;
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
       gsap.to(glowRef.current, { x, y, duration: 1.5, ease: 'power2.out' });
     };
 
@@ -56,12 +56,8 @@ export default function Hero({ ready = true }: HeroProps) {
     >
       <div
         ref={glowRef}
-        className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-thrift-accent/5 rounded-full blur-[120px] pointer-events-none"
+        className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-thrift-accent/[0.04] rounded-full blur-[100px] pointer-events-none"
       />
-
-      <span className="absolute top-20 right-6 lg:right-10 text-[140px] lg:text-[240px] font-bold text-thrift-border/40 leading-none select-none pointer-events-none tracking-[-0.05em]">
-        01
-      </span>
 
       <div className="max-w-[1400px] mx-auto w-full relative z-10">
         <div
@@ -73,25 +69,29 @@ export default function Hero({ ready = true }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-9 flex flex-col items-start">
             <div ref={badgeRef} className="inline-flex items-center gap-3 mb-10 opacity-0">
+              <span className="w-8 h-px bg-thrift-accent" />
+              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-text-muted">
+                Est. 2024 — Thrift Fashion
+              </span>
             </div>
 
             <div className="overflow-hidden mb-1">
               <div ref={line1Ref} className="opacity-0">
-                <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-cream">
+                <h1 className="text-[clamp(3rem,8.5vw,8rem)] font-bold uppercase tracking-[-0.04em] leading-[0.88] text-thrift-cream">
                   Jual
                 </h1>
               </div>
             </div>
             <div className="overflow-hidden mb-1">
               <div ref={line2Ref} className="opacity-0">
-                <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-cream">
+                <h1 className="text-[clamp(3rem,8.5vw,8rem)] font-bold uppercase tracking-[-0.04em] leading-[0.88] text-thrift-cream">
                   Dan Beli
                 </h1>
               </div>
             </div>
             <div className="overflow-hidden mb-12">
               <div ref={line3Ref} className="opacity-0">
-                <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-bold uppercase tracking-[-0.04em] leading-[0.86] text-thrift-accent">
+                <h1 className="text-[clamp(3rem,8.5vw,8rem)] font-bold uppercase tracking-[-0.04em] leading-[0.88] text-thrift-accent">
                   Pakaian Bekas
                 </h1>
               </div>
@@ -100,7 +100,7 @@ export default function Hero({ ready = true }: HeroProps) {
             <div className="flex flex-col sm:flex-row gap-12 items-start">
               <p
                 ref={descRef}
-                className="text-base sm:text-lg text-thrift-text-muted max-w-sm leading-relaxed font-light opacity-0"
+                className="text-sm sm:text-base text-thrift-text-muted max-w-sm leading-relaxed font-light opacity-0"
               >
                 Streetwear vintage pilihan, arsip langka, dan potongan second-hand
                 otentik yang dirancang untuk generasi berani. Tanpa replika,
@@ -110,14 +110,14 @@ export default function Hero({ ready = true }: HeroProps) {
               <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 opacity-0">
                 <Link
                   href="/collection"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 group"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 group"
                 >
                   Jelajahi Koleksi
-                  <ArrowDownRight className="w-4 h-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300" />
+                  <ArrowDownRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform duration-300" />
                 </Link>
                 <Link
                   href="/about"
-                  className="inline-flex items-center justify-center px-8 py-4 border border-thrift-border-light text-thrift-cream text-xs font-bold uppercase tracking-[0.15em] hover:border-thrift-cream transition-all duration-300"
+                  className="inline-flex items-center justify-center px-8 py-4 border border-thrift-border-light text-thrift-cream text-[11px] font-bold uppercase tracking-[0.15em] hover:border-thrift-cream transition-all duration-300"
                 >
                   Tentang Kami
                 </Link>
@@ -130,7 +130,7 @@ export default function Hero({ ready = true }: HeroProps) {
               <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-text-muted mb-3">
                 Keaslian Terjamin
               </p>
-              <p className="text-sm text-thrift-text-muted leading-relaxed">
+              <p className="text-[13px] text-thrift-text-muted leading-relaxed">
                 Setiap pakaian melewati penilaian kondisi ketat dan inspeksi
                 kualitas sebelum memasuki arsip ThriftLab.
               </p>

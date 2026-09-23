@@ -20,11 +20,11 @@ export default function CTA() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         textRef.current,
-        { y: 80, opacity: 0 },
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.2,
+          duration: 1,
           ease: 'power4.out',
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -35,11 +35,11 @@ export default function CTA() {
 
       gsap.fromTo(
         btnRef.current,
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.8,
           ease: 'power4.out',
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -80,10 +80,10 @@ export default function CTA() {
         <Link
           ref={btnRef}
           href="/collection"
-          className="inline-flex items-center gap-3 px-10 py-5 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-thrift-accent-warm transition-all duration-500 group"
+          className="inline-flex items-center gap-3 px-10 py-5 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-thrift-accent-warm transition-all duration-500 group"
         >
           Eksplor Katalog
-          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
         </Link>
       </div>
     </section>

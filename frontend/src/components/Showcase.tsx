@@ -53,7 +53,7 @@ export default function Showcase() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         headingRef.current,
-        { y: 30, opacity: 0 },
+        { y: 24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
@@ -120,23 +120,23 @@ export default function Showcase() {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
-        className="flex gap-4 sm:gap-6 px-6 lg:px-10 overflow-x-auto no-scrollbar cursor-grab select-none"
+        className="flex gap-4 sm:gap-5 px-6 lg:px-10 overflow-x-auto no-scrollbar cursor-grab select-none"
         style={{ scrollBehavior: dragging ? 'auto' : 'smooth' }}
       >
         {featured.map((item) => (
           <Link
             key={item.id}
             href={`/collection/${item.id}`}
-            className="group relative w-[260px] sm:w-[380px] lg:w-[450px] shrink-0"
+            className="group relative w-[260px] sm:w-[360px] lg:w-[420px] shrink-0"
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-thrift-border">
               <img
                 src={item.image}
                 alt={item.name}
                 draggable={false}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent" />
               <div className="absolute top-4 left-4 px-3 py-1.5 bg-thrift-accent text-[9px] font-mono uppercase tracking-wider text-white">
                 Unggulan
               </div>
@@ -144,14 +144,14 @@ export default function Showcase() {
                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent">
                   {item.subcategory}
                 </span>
-                <h3 className="text-lg sm:text-2xl font-bold uppercase tracking-tight text-white mt-1 line-clamp-1">
+                <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-white mt-1 line-clamp-1">
                   {item.name}
                 </h3>
                 <div className="flex items-center justify-between mt-3">
                   <span className="text-sm font-bold font-mono text-white">
                     Rp {item.price.toLocaleString('id-ID')}
                   </span>
-                  <div className="w-8 h-8 border border-white/40 flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
+                  <div className="w-8 h-8 border border-white/30 flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
                     <ArrowUpRight className="w-4 h-4 text-white" />
                   </div>
                 </div>

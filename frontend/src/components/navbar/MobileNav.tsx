@@ -34,14 +34,14 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
         );
         gsap.fromTo(
           linksRef.current.filter(Boolean),
-          { y: 40, opacity: 0 },
+          { y: 30, opacity: 0 },
           {
             y: 0,
             opacity: 1,
             duration: 0.4,
-            stagger: 0.06,
+            stagger: 0.05,
             ease: 'power3.out',
-            delay: 0.15,
+            delay: 0.1,
           }
         );
       }
@@ -65,7 +65,7 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
   return (
     <div
       ref={menuRef}
-      className={`fixed inset-0 z-30 bg-[#f5f0e8] flex flex-col overflow-y-auto ${
+      className={`fixed inset-0 z-30 bg-thrift-surface flex flex-col overflow-y-auto ${
         open ? 'pointer-events-auto' : 'pointer-events-none'
       }`}
       style={{ opacity: open ? 1 : 0 }}

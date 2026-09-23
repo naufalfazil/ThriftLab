@@ -30,26 +30,26 @@ function ProductCard({ product }: { product: Product }) {
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
         />
-        <span className="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-sm text-[9px] font-mono uppercase tracking-wider text-white">
+        <span className="absolute top-4 right-4 px-2 py-1 bg-black/50 backdrop-blur-sm text-[9px] font-mono uppercase tracking-wider text-white/90">
           {product.details.condition}
         </span>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute bottom-4 right-4 w-9 h-9 flex items-center justify-center border border-white/40 bg-black/40 backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute bottom-4 right-4 w-9 h-9 flex items-center justify-center border border-white/30 bg-black/30 backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
           <ArrowUpRight className="w-4 h-4 text-white" />
         </div>
       </div>
-      <div className="pt-4 flex items-start justify-between gap-3">
+      <div className="pt-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">
             {product.subcategory} &middot; {product.details.size}
           </p>
-          <h3 className="text-[15px] font-semibold uppercase tracking-tight text-thrift-text truncate">
+          <h3 className="text-[14px] font-semibold uppercase tracking-tight text-thrift-text truncate">
             {product.name}
           </h3>
         </div>
-        <span className="shrink-0 text-[15px] font-bold font-mono text-thrift-cream">
+        <span className="shrink-0 text-[14px] font-bold font-mono text-thrift-cream">
           Rp {product.price.toLocaleString('id-ID')}
         </span>
       </div>
@@ -144,7 +144,7 @@ function CollectionContent() {
             ))}
           </div>
         ) : error ? (
-          <div className="text-center py-24 border border-thrift-border bg-thrift-surface">
+          <div className="text-center py-24 border border-thrift-border bg-thrift-bg-alt">
             <p className="text-sm text-thrift-text-muted font-mono mb-2">
               Gagal memuat produk.
             </p>
@@ -159,7 +159,7 @@ function CollectionContent() {
             </button>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-24 border border-thrift-border bg-thrift-surface">
+          <div className="text-center py-24 border border-thrift-border bg-thrift-bg-alt">
             <p className="text-sm text-thrift-text-muted font-mono mb-2">
               Tidak ada produk ditemukan di kategori ini.
             </p>

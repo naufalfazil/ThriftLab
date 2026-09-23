@@ -100,7 +100,7 @@ export default function ProductDetailPage() {
               alt={product.name}
               className="w-full h-full object-cover"
             />
-            <span className="absolute top-4 right-4 px-3 py-1.5 bg-black/60 backdrop-blur-sm text-[10px] font-mono uppercase tracking-wider text-white">
+            <span className="absolute top-4 right-4 px-3 py-1.5 bg-black/50 backdrop-blur-sm text-[10px] font-mono uppercase tracking-wider text-white/90">
               {product.details.condition}
             </span>
           </div>
@@ -171,9 +171,10 @@ export default function ProductDetailPage() {
               </div>
             )}
 
-            <button 
-            onClick={() => { showToast(`${product.name} ditambahkan ke keranjang`); }}
-            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 w-full sm:w-auto cursor-pointer">
+            <button
+              onClick={() => { addItem(product); showToast(`${product.name} ditambahkan ke keranjang`); }}
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 w-full sm:w-auto cursor-pointer"
+            >
               Tambahkan ke Keranjang
               <ArrowUpRight className="w-4 h-4" />
             </button>
@@ -196,9 +197,9 @@ export default function ProductDetailPage() {
                       src={item.image}
                       alt={item.name}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                   <div className="pt-3">
                     <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">

@@ -145,7 +145,7 @@ export default function ContactPage() {
                     id="page-name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
+                    className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                     placeholder="Nama Anda"
                   />
                 </div>
@@ -161,7 +161,7 @@ export default function ContactPage() {
                     id="page-email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
+                    className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                     placeholder="email@anda.com"
                   />
                 </div>
@@ -178,7 +178,7 @@ export default function ContactPage() {
                   id="page-subject"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
+                  className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                   placeholder="Perihal pesan Anda"
                 />
               </div>
@@ -194,7 +194,7 @@ export default function ContactPage() {
                   rows={6}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors resize-none"
+                  className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors resize-none"
                   placeholder="Tulis pesan Anda di sini..."
                 />
               </div>
@@ -212,7 +212,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-pointer"
               >
                 {loading ? (
                   'Mengirim...'

@@ -71,7 +71,7 @@ export default function DesktopNav() {
               onMouseLeave={handleLeave}
             >
               <div
-                className="bg-[#f5f0e8] border border-thrift-border shadow-[0_8px_30px_rgba(0,0,0,0.08)] min-w-[220px] py-2"
+                className="bg-thrift-surface border border-thrift-border shadow-[0_8px_30px_rgba(0,0,0,0.06)] min-w-[220px] py-2"
                 style={{
                   animation: 'dropdownIn 0.15s ease-out forwards',
                 }}

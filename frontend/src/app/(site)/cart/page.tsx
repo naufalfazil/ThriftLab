@@ -19,7 +19,7 @@ export default function CartPage() {
         </p>
         <Link
           href="/collection"
-          className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300"
         >
           Mulai Belanja
           <ArrowUpRight className="w-4 h-4" />
@@ -51,7 +51,7 @@ export default function CartPage() {
           <div className="lg:col-span-8">
             <div className="border border-thrift-border divide-y divide-thrift-border">
               {items.map((item) => (
-                <div key={item.product.id} className="flex gap-6 p-6 bg-[#f5f0e8]">
+                <div key={item.product.id} className="flex gap-6 p-6 bg-thrift-surface">
                   <Link
                     href={`/collection/${item.product.id}`}
                     className="shrink-0 w-24 h-32 sm:w-28 sm:h-36 bg-thrift-border overflow-hidden"
@@ -115,7 +115,7 @@ export default function CartPage() {
           </div>
 
           <div className="lg:col-span-4">
-            <div className="border border-thrift-border p-6 bg-[#f5f0e8] sticky top-28">
+            <div className="border border-thrift-border p-6 bg-thrift-surface sticky top-28">
               <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-text-muted mb-6">
                 Ringkasan
               </p>
@@ -144,7 +144,7 @@ export default function CartPage() {
 
               <Link
                 href="/auth/login"
-                className="flex items-center justify-center gap-2 w-full px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300"
+                className="flex items-center justify-center gap-2 w-full px-8 py-4 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300"
               >
                 Checkout
                 <ArrowUpRight className="w-4 h-4" />

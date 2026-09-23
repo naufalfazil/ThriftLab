@@ -50,7 +50,7 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-            <div className="border border-thrift-border p-6 flex flex-col justify-between h-52 bg-[#f5f0e8]">
+            <div className="border border-thrift-border p-6 flex flex-col justify-between h-52 bg-thrift-surface">
               <span className="text-4xl font-bold font-mono text-thrift-accent">100%</span>
               <div>
                 <h4 className="text-sm font-semibold uppercase tracking-tight mb-1 text-thrift-cream">
@@ -61,7 +61,7 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="border border-thrift-border p-6 flex flex-col justify-between h-52 bg-[#f5f0e8] sm:mt-8">
+            <div className="border border-thrift-border p-6 flex flex-col justify-between h-52 bg-thrift-surface sm:mt-8">
               <span className="text-4xl font-bold font-mono text-thrift-cream">0%</span>
               <div>
                 <h4 className="text-sm font-semibold uppercase tracking-tight mb-1 text-thrift-cream">
@@ -76,19 +76,19 @@ export default function AboutPage() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-thrift-border border border-thrift-border mb-20">
-          <div className="bg-[#f5f0e8] p-6 sm:p-8 text-center">
+          <div className="bg-thrift-surface p-6 sm:p-8 text-center">
             <span className="text-2xl sm:text-3xl font-bold text-thrift-accent font-mono">40+</span>
             <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Arsip Pilihan</p>
           </div>
-          <div className="bg-[#f5f0e8] p-6 sm:p-8 text-center">
+          <div className="bg-thrift-surface p-6 sm:p-8 text-center">
             <span className="text-2xl sm:text-3xl font-bold text-thrift-cream font-mono">8</span>
             <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Kategori Utama</p>
           </div>
-          <div className="bg-[#f5f0e8] p-6 sm:p-8 text-center">
+          <div className="bg-thrift-surface p-6 sm:p-8 text-center">
             <span className="text-2xl sm:text-3xl font-bold text-thrift-cream font-mono">9/10</span>
             <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Kualitas Kondisi</p>
           </div>
-          <div className="bg-[#f5f0e8] p-6 sm:p-8 text-center">
+          <div className="bg-thrift-surface p-6 sm:p-8 text-center">
             <span className="text-2xl sm:text-3xl font-bold text-thrift-accent font-mono">1-of-1</span>
             <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Edisi Eksklusif</p>
           </div>

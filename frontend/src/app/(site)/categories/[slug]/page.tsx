@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { fetchProducts, slugToCategory, type Product } from '@/lib/api';
-import { ArrowUpRight } from 'lucide-react';
 
 function ProductCard({ product }: { product: Product }) {
   return (
@@ -14,12 +13,12 @@ function ProductCard({ product }: { product: Product }) {
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
         />
-        <span className="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-sm text-[9px] font-mono uppercase tracking-wider text-white">
+        <span className="absolute top-4 right-4 px-2 py-1 bg-black/50 backdrop-blur-sm text-[9px] font-mono uppercase tracking-wider text-white/90">
           {product.details.condition}
         </span>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
       <div className="pt-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
@@ -101,7 +100,7 @@ export default function CategoryDetailPage() {
             ))}
           </div>
         ) : notFound ? (
-          <div className="text-center py-24 border border-thrift-border bg-thrift-surface">
+          <div className="text-center py-24 border border-thrift-border bg-thrift-bg-alt">
             <p className="text-sm text-thrift-text-muted font-mono mb-2">
               Kategori &ldquo;{categoryName}&rdquo; tidak ditemukan.
             </p>

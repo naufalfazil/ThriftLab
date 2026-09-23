@@ -38,11 +38,11 @@ export default function Categories() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         headingRef.current,
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.7,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: headingRef.current,
@@ -53,12 +53,12 @@ export default function Categories() {
 
       gsap.fromTo(
         gridRef.current!.children,
-        { y: 60, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.1,
+          duration: 0.6,
+          stagger: 0.08,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: gridRef.current,
@@ -109,9 +109,9 @@ export default function Categories() {
                 <img
                   src={cat.image}
                   alt={cat.name}
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-[1.03] transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent" />
                 <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
                   <div className="flex items-end justify-between">
                     <div>
@@ -122,7 +122,7 @@ export default function Categories() {
                         {cat.name}
                       </h3>
                     </div>
-                    <div className="w-10 h-10 border border-white/40 flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
+                    <div className="w-10 h-10 border border-white/30 flex items-center justify-center group-hover:bg-thrift-accent group-hover:border-thrift-accent transition-all duration-300">
                       <ArrowUpRight className="w-4 h-4 text-white" />
                     </div>
                   </div>

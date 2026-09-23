@@ -40,19 +40,19 @@ export default function SustainabilityPage() {
             </p>
 
             <div className="my-12 grid grid-cols-1 sm:grid-cols-3 gap-px bg-thrift-border border border-thrift-border">
-              <div className="bg-[#f5f0e8] p-8 text-center">
+              <div className="bg-thrift-surface p-8 text-center">
                 <span className="text-3xl font-bold text-thrift-accent font-mono">70%</span>
                 <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-3">
                   Pengurangan Jejak Karbon
                 </p>
               </div>
-              <div className="bg-[#f5f0e8] p-8 text-center">
+              <div className="bg-thrift-surface p-8 text-center">
                 <span className="text-3xl font-bold text-thrift-cream font-mono">2700L</span>
                 <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-3">
                   Air Hemat per Item
                 </p>
               </div>
-              <div className="bg-[#f5f0e8] p-8 text-center">
+              <div className="bg-thrift-surface p-8 text-center">
                 <span className="text-3xl font-bold text-thrift-accent font-mono">0</span>
                 <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-3">
                   Limbah Produksi Baru
@@ -90,7 +90,7 @@ export default function SustainabilityPage() {
           <div className="mt-16">
             <Link
               href="/collection"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300"
             >
               Lihat Koleksi Kami
             </Link>

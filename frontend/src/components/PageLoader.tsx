@@ -52,7 +52,7 @@ export default function PageLoader({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#f5f0e8]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-thrift-surface"
       style={{ clipPath: 'inset(0 0 0% 0)' }}
     >
       <div ref={textRef} className="overflow-hidden">

@@ -29,11 +29,11 @@ export default function Contact() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         headingRef.current,
-        { y: 60, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.8,
           ease: 'power4.out',
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -44,11 +44,11 @@ export default function Contact() {
 
       gsap.fromTo(
         formRef.current,
-        { y: 50, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.8,
           ease: 'power4.out',
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -60,11 +60,11 @@ export default function Contact() {
 
       gsap.fromTo(
         infoRef.current,
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.8,
           ease: 'power4.out',
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -111,7 +111,7 @@ export default function Contact() {
         }),
       });
 
-      const data = await res.text();
+      const data = await res.json();
 
       if (!res.ok) {
         throw new Error(data.error || 'Gagal mengirim pesan.');
@@ -135,7 +135,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-24 sm:py-32 px-6 lg:px-10 bg-[#ede8df] border-t border-thrift-border"
+      className="py-24 sm:py-32 px-6 lg:px-10 bg-thrift-bg-alt border-t border-thrift-border"
     >
       <div className="max-w-[1400px] mx-auto">
         <div ref={headingRef}>
@@ -172,7 +172,7 @@ export default function Contact() {
                     id="contact-name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
+                    className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                     placeholder="Nama Anda"
                   />
                 </div>
@@ -188,7 +188,7 @@ export default function Contact() {
                     id="contact-email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
+                    className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                     placeholder="email@anda.com"
                   />
                 </div>
@@ -205,7 +205,7 @@ export default function Contact() {
                   id="contact-subject"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
+                  className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                   placeholder="Perihal pesan Anda"
                 />
               </div>
@@ -221,7 +221,7 @@ export default function Contact() {
                   rows={6}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors resize-none"
+                  className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors resize-none"
                   placeholder="Tulis pesan Anda di sini..."
                 />
               </div>
@@ -239,7 +239,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 cursor-pointer"
               >
                 {loading ? (
                   'Mengirim...'
@@ -254,7 +254,7 @@ export default function Contact() {
           </div>
 
           <div ref={infoRef} className="lg:col-span-5 space-y-8">
-            <div className="border border-thrift-border p-6 bg-[#f5f0e8]">
+            <div className="border border-thrift-border p-6 bg-thrift-surface">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 border border-thrift-border flex items-center justify-center shrink-0">
                   <Mail className="w-4 h-4 text-thrift-accent" />
@@ -268,14 +268,14 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="border border-thrift-border p-6 bg-[#f5f0e8]">
+            <div className="border border-thrift-border p-6 bg-thrift-surface">
               <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-3">
                 Jam Operasional
               </p>
               <p className="text-sm text-thrift-cream">Senin — Jumat, 09:00 — 17:00 WIB</p>
             </div>
 
-            <div className="border border-thrift-border p-6 bg-[#f5f0e8]">
+            <div className="border border-thrift-border p-6 bg-thrift-surface">
               <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-3">
                 Lokasi
               </p>

@@ -11,9 +11,9 @@ function ArticleCard({ article }: { article: (typeof articles)[0] }) {
           src={article.image}
           alt={article.title}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
       <div className="pt-4">
         <div className="flex items-center gap-3 mb-2">
@@ -67,7 +67,7 @@ export default function JournalPage() {
             <img
               src={featured.image}
               alt={featured.title}
-              className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+              className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
             />
             <span className="absolute top-4 left-4 px-3 py-1.5 bg-thrift-accent text-[9px] font-mono uppercase tracking-wider text-white">
               Featured

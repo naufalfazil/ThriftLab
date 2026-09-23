@@ -28,14 +28,12 @@ export default function LoginPage() {
     <>
       <section className="min-h-screen flex items-center justify-center px-6 lg:px-10">
         <div className="w-full max-w-md">
-          {/* Brand */}
           <div className="text-center mb-10">
             <h1 className="text-lg font-bold tracking-[-0.03em] uppercase text-thrift-cream">
               Thrift<span className="text-thrift-accent">Lab</span>
             </h1>
           </div>
 
-          {/* Heading */}
           <div className="text-center mb-10">
             <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-thrift-accent mb-4">
               {'// Sign In'}
@@ -49,7 +47,6 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label
@@ -63,7 +60,7 @@ export default function LoginPage() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
+                className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                 placeholder="nama@email.com"
                 autoComplete="email"
               />
@@ -82,7 +79,7 @@ export default function LoginPage() {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-[#f5f0e8] border border-thrift-border px-4 py-3 pr-12 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
+                  className="w-full bg-thrift-surface border border-thrift-border px-4 py-3 pr-12 text-sm text-thrift-cream placeholder:text-thrift-text-muted focus:outline-none focus:border-thrift-accent transition-colors"
                   placeholder="Masukkan password"
                   autoComplete="current-password"
                 />
@@ -103,13 +100,12 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-thrift-accent text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-thrift-accent text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-thrift-accent-warm transition-all duration-300 cursor-pointer"
             >
               Login
             </button>
           </form>
 
-          {/* Register link */}
           <div className="mt-8 text-center">
             <p className="text-sm text-thrift-text-muted">
               Belum punya akun?{' '}

@@ -51,33 +51,33 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
         />
 
-        <span className="absolute top-4 left-4 text-[10px] font-mono text-white/70 tabular-nums">
+        <span className="absolute top-4 left-4 text-[10px] font-mono text-white/60 tabular-nums">
           {String(index + 1).padStart(2, '0')}
         </span>
 
-        <span className="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-sm text-[9px] font-mono uppercase tracking-wider text-white">
+        <span className="absolute top-4 right-4 px-2 py-1 bg-black/50 backdrop-blur-sm text-[9px] font-mono uppercase tracking-wider text-white/90">
           {product.details.condition}
         </span>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute bottom-4 right-4 w-9 h-9 flex items-center justify-center border border-white/40 bg-black/40 backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute bottom-4 right-4 w-9 h-9 flex items-center justify-center border border-white/30 bg-black/30 backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
           <Plus className="w-4 h-4 text-white" />
         </div>
       </div>
 
-      <div className="pt-4 flex items-start justify-between gap-3">
+      <div className="pt-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-thrift-text-muted mb-1">
             {product.subcategory} &middot; {product.details.size}
           </p>
-          <h3 className="text-[15px] font-semibold uppercase tracking-tight text-thrift-text truncate">
+          <h3 className="text-[14px] font-semibold uppercase tracking-tight text-thrift-text truncate">
             {product.name}
           </h3>
         </div>
-        <span className="shrink-0 text-[15px] font-bold font-mono text-thrift-cream">
+        <span className="shrink-0 text-[14px] font-bold font-mono text-thrift-cream">
           Rp {product.price.toLocaleString('id-ID')}
         </span>
       </div>
@@ -97,12 +97,12 @@ function FeaturedCard({ product }: { product: Product }) {
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+          className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
 
         <div className="absolute top-6 left-6 flex items-center gap-3">
-          <span className="text-[10px] font-mono text-white/70">01</span>
+          <span className="text-[10px] font-mono text-white/60">01</span>
           <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-thrift-accent">
             Pilihan Utama
           </span>
@@ -110,7 +110,7 @@ function FeaturedCard({ product }: { product: Product }) {
 
         <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-white/70 mb-2">
+            <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-white/60 mb-2">
               {product.subcategory} &middot; {product.details.size} &middot; {product.details.condition}
             </p>
             <h3 className="text-2xl sm:text-3xl font-bold uppercase tracking-[-0.02em] text-white leading-none mb-2">
@@ -166,11 +166,11 @@ export default function FeaturedProducts() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         headingRef.current,
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.7,
           ease: 'power3.out',
           scrollTrigger: { trigger: headingRef.current, start: 'top 85%' },
         }
@@ -178,11 +178,11 @@ export default function FeaturedProducts() {
 
       gsap.fromTo(
         tabsRef.current,
-        { y: 20, opacity: 0 },
+        { y: 16, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.5,
           ease: 'power3.out',
           scrollTrigger: { trigger: tabsRef.current, start: 'top 85%' },
         }
@@ -198,12 +198,12 @@ export default function FeaturedProducts() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         gridRef.current!.children,
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.08,
+          duration: 0.5,
+          stagger: 0.06,
           ease: 'power3.out',
           scrollTrigger: { trigger: gridRef.current, start: 'top 80%' },
         }
@@ -264,7 +264,7 @@ export default function FeaturedProducts() {
             ))}
           </div>
         ) : error ? (
-          <div className="text-center py-24 border border-thrift-border bg-thrift-surface">
+          <div className="text-center py-24 border border-thrift-border bg-thrift-bg-alt">
             <p className="text-sm text-thrift-text-muted font-mono mb-2">
               Gagal memuat produk.
             </p>
@@ -279,7 +279,7 @@ export default function FeaturedProducts() {
             </button>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-24 border border-thrift-border bg-thrift-surface">
+          <div className="text-center py-24 border border-thrift-border bg-thrift-bg-alt">
             <p className="text-sm text-thrift-text-muted font-mono mb-2">
               Tidak ada produk ditemukan di kategori ini.
             </p>

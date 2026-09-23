@@ -54,15 +54,15 @@ export default function StoryPage() {
           </div>
 
           <div className="mt-16 grid grid-cols-3 gap-px bg-thrift-border border border-thrift-border">
-            <div className="bg-[#f5f0e8] p-6 text-center">
+            <div className="bg-thrift-surface p-6 text-center">
               <span className="text-2xl font-bold text-thrift-accent font-mono">2024</span>
               <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Tahun Berdiri</p>
             </div>
-            <div className="bg-[#f5f0e8] p-6 text-center">
+            <div className="bg-thrift-surface p-6 text-center">
               <span className="text-2xl font-bold text-thrift-cream font-mono">40+</span>
               <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Koleksi</p>
             </div>
-            <div className="bg-[#f5f0e8] p-6 text-center">
+            <div className="bg-thrift-surface p-6 text-center">
               <span className="text-2xl font-bold text-thrift-accent font-mono">100%</span>
               <p className="text-[10px] uppercase tracking-[0.15em] text-thrift-text-muted mt-2">Otentik</p>
             </div>
